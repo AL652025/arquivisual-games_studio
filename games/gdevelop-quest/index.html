@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON PROTOCOL: GDEVELOP EDITION - Arquivisual Games</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #06070d;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #game-container {
+            position: relative;
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+            border: 2px solid #06b6d4;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0b0f19;
+        }
+        canvas {
+            display: block;
+        }
+        .ui-overlay {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 16px;
+            pointer-events: none;
+            text-shadow: 0 0 8px rgba(0,0,0,0.8);
+        }
+        .banner-top {
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .badge {
+            background: #6366f1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner-top">
+        <span class="badge">GDEVELOP 5 HTML5 ENGINE</span>
+        <span>Controles: <strong>A / D o Flechas</strong> (Mover) | <strong>W / Espacio</strong> (Saltar)</span>
+    </div>
+
+    <div id="game-container">
+        <div class="ui-overlay">
+            <div id="score-text">SCORE: 0</div>
+            <div id="lives-text">VIDAS: ❤️❤️❤️</div>
+        </div>
+        <canvas id="game-canvas" width="800" height="450"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score-text');
+        const livesEl = document.getElementById('lives-text');
+
+        let score = 0;
+        let lives = 3;
+        let keys = {};
+
+        const player = {
+            x: 50,
+            y: 340,
+            w: 32,
+            h: 44,
+            vx: 0,
+            vy: 0,
+            speed: 5.5,
+            jumpPower: -12,
+            grounded: false,
+            color: '#06b6d4'
+        };
+
+        const platforms = [
+            { x: 0, y: 400, w: 800, h: 50, color: '#3b82f6' },
+            { x: 120, y: 310, w: 140, h: 16, color: '#6366f1' },
+            { x: 320, y: 250, w: 160, h: 16, color: '#8b5cf6' },
+            { x: 540, y: 190, w: 180, h: 16, color: '#ec4899' },
+            { x: 260, y: 140, w: 140, h: 16, color: '#06b6d4' }
+        ];
+
+        let coins = [
+            { x: 180, y: 270, collected: false },
+            { x: 390, y: 210, collected: false },
+            { x: 620, y: 150, collected: false },
+            { x: 320, y: 100, collected: false },
+            { x: 700, y: 360, collected: false }
+        ];
+
+        window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+        window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+        function update() {
+            // Movimiento lateral
+            if (keys['arrowleft'] || keys['a']) {
+                player.vx = -player.speed;
+            } else if (keys['arrowright'] || keys['d']) {
+                player.vx = player.speed;
+            } else {
+                player.vx = 0;
+            }
+
+            // Salto
+            if ((keys['arrowup'] || keys['w'] || keys[' ']) && player.grounded) {
+                player.vy = player.jumpPower;
+                player.grounded = false;
+            }
+
+            // Gravedad
+            player.vy += 0.55;
+            player.x += player.vx;
+            player.y += player.vy;
+
+            // Límites de pantalla laterales
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.w > canvas.width) player.x = canvas.width - player.w;
+
+            // Colisiones con plataformas
+            player.grounded = false;
+            for (const p of platforms) {
+                if (
+                    player.x + player.w > p.x &&
+                    player.x < p.x + p.w &&
+                    player.y + player.h >= p.y &&
+                    player.y + player.h <= p.y + 20 &&
+                    player.vy >= 0
+                ) {
+                    player.y = p.y - player.h;
+                    player.vy = 0;
+                    player.grounded = true;
+                }
+            }
+
+            // Caída
+            if (player.y > canvas.height) {
+                lives--;
+                player.x = 50;
+                player.y = 340;
+                player.vy = 0;
+                if (lives <= 0) {
+                    alert('¡Juego Terminado! Reiniciando...');
+                    lives = 3;
+                    score = 0;
+                    coins.forEach(c => c.collected = false);
+                }
+                livesEl.textContent = 'VIDAS: ' + '❤️'.repeat(lives);
+            }
+
+            // Recolección de gemas
+            coins.forEach(c => {
+                if (!c.collected) {
+                    if (
+                        player.x + player.w > c.x &&
+                        player.x < c.x + 20 &&
+                        player.y + player.h > c.y &&
+                        player.y < c.y + 20
+                    ) {
+                        c.collected = true;
+                        score += 100;
+                        scoreEl.textContent = `SCORE: ${score}`;
+                    }
+                }
+            });
+
+            // Si recoge todas las monedas, renacen
+            if (coins.every(c => c.collected)) {
+                coins.forEach(c => c.collected = false);
+                score += 500;
+                scoreEl.textContent = `SCORE: ${score} (¡BONUS STAGE!)`;
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Fondo gradiente
+            const bg = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            bg.addColorStop(0, '#0a0d18');
+            bg.addColorStop(1, '#151b2e');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Plataformas
+            for (const p of platforms) {
+                ctx.fillStyle = p.color;
+                ctx.shadowColor = p.color;
+                ctx.shadowBlur = 10;
+                ctx.fillRect(p.x, p.y, p.w, p.h);
+                ctx.shadowBlur = 0;
+            }
+
+            // Monedas
+            coins.forEach(c => {
+                if (!c.collected) {
+                    ctx.save();
+                    ctx.fillStyle = '#facc15';
+                    ctx.shadowColor = '#facc15';
+                    ctx.shadowBlur = 12;
+                    ctx.beginPath();
+                    ctx.arc(c.x + 10, c.y + 10, 9, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            });
+
+            // Jugador
+            ctx.save();
+            ctx.fillStyle = player.color;
+            ctx.shadowColor = player.color;
+            ctx.shadowBlur = 15;
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+            // Ojos neón
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(player.x + (player.vx < 0 ? 4 : 18), player.y + 10, 8, 6);
+            ctx.restore();
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        requestAnimationFrame(gameLoop);
+    </script>
+</body>
+</html>

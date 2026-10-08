@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQUIVISUAL GAMES | Portal Oficial de Videojuegos & Experiencias Interactivas</title>
+    <meta name="description" content="Juega online y descarga todos los videojuegos de Arquivisual Games creados en GDevelop, Itch.io y motores WebGL. Plataformas, carreras, arquitectura 3D y acción arcade.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="brand-logo">
+                <div class="logo-icon">▲</div>
+                <div class="logo-text">
+                    <span class="title">ARQUIVISUAL</span>
+                    <span class="subtitle">GAMES & INTERACTIVE</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#hero" class="nav-link active"><span>🏠 Inicio</span></a></li>
+                    <li><a href="#catalogo" class="nav-link"><span>🎮 Catálogo</span></a></li>
+                    <li><a href="#arcade-section" class="nav-link"><span>🕹️ Arcade Online</span></a></li>
+                    <li><a href="#guia-subir" class="nav-link"><span>🚀 Cómo Subir Juegos</span></a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="sound-toggle-btn" class="btn-icon" title="Activar/Silenciar Sonido" aria-label="Toggle Sound">
+                    🔊
+                </button>
+                <a href="#catalogo" class="btn btn-primary">
+                    <span>JUGAR AHORA</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <div class="hero-tag">
+                            <span class="dot"></span>
+                            <span>PORTAL DE VIDEOJUEGOS INDIE & ARQUITECTURA</span>
+                        </div>
+                        <h1 class="hero-title">
+                            JUEGA ONLINE Y DESCARGA <br>
+                            <span class="highlight">ARQUIVISUAL GAMES</span>
+                        </h1>
+                        <p class="hero-description">
+                            Tu centro oficial de videojuegos creados con <strong>GDevelop</strong>, <strong>Itch.io</strong> y tecnologías WebGL. Experiencias inmersivas, mundos arquitectónicos en 3D, arcades de velocidad y acción listos para jugar en tu navegador o descargar a tu PC.
+                        </p>
+
+                        <div class="hero-cta">
+                            <a href="#catalogo" class="btn btn-primary">
+                                <span>🚀 EXPLORAR CATÁLOGO</span>
+                            </a>
+                            <a href="#arcade-section" class="btn btn-secondary">
+                                <span>🕹️ PROBAR ARCADE EN VIVO</span>
+                            </a>
+                            <a href="#guia-subir" class="btn btn-accent">
+                                <span>📦 SUBIR NUEVO JUEGO</span>
+                            </a>
+                        </div>
+
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-num" id="stat-total-games">5+</div>
+                                <div class="stat-label">Juegos Disponibles</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-num">50K+</div>
+                                <div class="stat-label">Partidas Jugadas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-num">100%</div>
+                                <div class="stat-label">HTML5 & WebGL</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-num">4.9 ★</div>
+                                <div class="stat-label">Valoración Media</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ARCADE INTERACTIVO HERO -->
+                    <div class="hero-arcade-card" id="hero-arcade-card">
+                        <div class="arcade-card-header">
+                            <div>
+                                <span class="badge-live">● EN VIVO</span>
+                                <strong style="margin-left: 8px; font-size: 14px;">CONSOLA INTERACTIVA</strong>
+                            </div>
+                            <span style="font-size: 12px; color: var(--neon-cyan); font-weight: 600;">60 FPS WebGL</span>
+                        </div>
+
+                        <div class="arcade-screen" id="arcade-screen-container">
+                            <canvas id="hero-arcade-canvas" class="arcade-canvas"></canvas>
+                        </div>
+
+                        <div class="arcade-card-footer">
+                            <span>⌨️ <strong>ESPACIO / W</strong>: Salto & Doble Salto</span>
+                            <span>📱 <strong>Toca la pantalla</strong> para jugar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATALOGO SECTION -->
+        <section id="catalogo" class="catalog-section" style="padding: 70px 0;">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Colección Principal</div>
+                    <h2 class="section-title">TODOS LOS VIDEOJUEGOS</h2>
+                    <p class="section-desc">
+                        Descubre títulos listos para jugar al instante en el navegador o descargar a tu ordenador. Filtrables por motor gráfico y categoría.
+                    </p>
+                </div>
+
+                <!-- CONTROLES DE FILTRO Y BÚSQUEDA -->
+                <div class="catalog-controls">
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">Todos los Juegos</button>
+                        <button class="filter-btn" data-filter="gdevelop">🎮 GDevelop HTML5</button>
+                        <button class="filter-btn" data-filter="itch">🌐 Itch.io</button>
+                        <button class="filter-btn" data-filter="3d">🏛️ Arquitectura 3D</button>
+                        <button class="filter-btn" data-filter="arcade">⚡ Arcade & Velocidad</button>
+                    </div>
+
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="search-games-input" class="search-input" placeholder="Buscar por título, tag o motor...">
+                    </div>
+                </div>
+
+                <!-- GRID DINÁMICO DE JUEGOS -->
+                <div class="games-grid" id="games-grid">
+                    <!-- Renderizado dinámico desde app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- GUÍA CÓMO SUBIR TUS JUEGOS -->
+        <section id="guia-subir" class="guide-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Guía de Desarrollo</div>
+                    <h2 class="section-title">CÓMO PUBLICAR TUS JUEGOS EN ESTA WEB</h2>
+                    <p class="section-desc">
+                        Integra fácilmente todos los proyectos que hagas en <strong>GDevelop</strong> o en <strong>itch.io</strong> para que tus jugadores puedan jugarlos online o descargarlos con 1 solo clic.
+                    </p>
+                </div>
+
+                <div class="guide-cards">
+                    <div class="guide-card">
+                        <div class="guide-step-num">1</div>
+                        <h3>Exporta desde GDevelop</h3>
+                        <p>
+                            En GDevelop ve a <strong>Archivo → Exportar → Web (HTML5)</strong>. Guarda los archivos generados en una carpeta dentro de este proyecto:
+                        </p>
+                        <div class="code-snippet">
+                            /arquivisual-games/games/nombre-de-tu-juego/
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-step-num">2</div>
+                        <h3>Vincula con Itch.io</h3>
+                        <p>
+                            Sube el archivo comprimido (.zip) o el instalador (.exe) a tu cuenta de <strong>itch.io</strong>. Copia el enlace de tu juego o el widget iframe para que aparezca directamente en tu web.
+                        </p>
+                        <div class="code-snippet">
+                            https://tu-usuario.itch.io/tu-juego
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-step-num">3</div>
+                        <h3>Regístralo en games-data.js</h3>
+                        <p>
+                            Abre <code>js/games-data.js</code> y añade los datos de tu juego (título, descripción, enlaces de descarga y juego online). La web lo detectará y mostrará automáticamente.
+                        </p>
+                        <div class="code-snippet">
+                            { id: "mi-nuevo-juego", title: "Mi Juego", engine: "GDevelop", ... }
+                        </div>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="guide-step-num">4</div>
+                        <h3>Sube a GitHub con 1 Clic</h3>
+                        <p>
+                            Con Git conectado a tu cuenta de GitHub, sube los cambios para que se actualice tu sitio web público en <strong>GitHub Pages</strong> de forma gratuita y con HTTPS.
+                        </p>
+                        <div class="code-snippet">
+                            git add . &amp;&amp; git commit -m "Nuevo juego" &amp;&amp; git push
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <div class="logo-icon">▲</div>
+                        <div class="logo-text">
+                            <span class="title">ARQUIVISUAL</span>
+                            <span class="subtitle">GAMES STUDIO</span>
+                        </div>
+                    </div>
+                    <p>
+                        Diseño y desarrollo de videojuegos interactivos, experiencias espaciales y arquitectura virtual. Hecho con pasión por el gaming y la tecnología.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Motores y Herramientas</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://gdevelop.io" target="_blank" rel="noopener">GDevelop 5 Engine</a></li>
+                        <li><a href="https://itch.io" target="_blank" rel="noopener">Itch.io Plataforma</a></li>
+                        <li><a href="https://blender.org" target="_blank" rel="noopener">Blender 3D Modeling</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub Pages Hosting</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="#hero">Inicio</a></li>
+                        <li><a href="#catalogo">Catálogo de Juegos</a></li>
+                        <li><a href="#hero-arcade-card">Consola Arcade</a></li>
+                        <li><a href="#guia-subir">Subir Videojuego</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ARQUIVISUAL GAMES. Todos los derechos reservados. Diseñado para distribución en GitHub, Itch.io y Web.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL POPUP PARA JUGAR Y DESCARGAR -->
+    <div class="modal-overlay" id="game-modal" role="dialog" aria-modal="true">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modal-game-title">Cargando Juego...</h3>
+                <button class="modal-close" id="modal-close-btn" title="Cerrar modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- VIEWPORT DEL JUEGO O DESCARGAS -->
+                <div class="game-viewport-wrapper" id="modal-game-viewport">
+                    <!-- Se inyecta dinámicamente -->
+                </div>
+
+                <!-- CONTROLES -->
+                <div class="game-modal-controls">
+                    <div class="controls-heading">🎮 Guía de Controles & Plataforma</div>
+                    <div class="controls-text" id="modal-controls-desc">
+                        Cargando información de controles...
+                    </div>
+                </div>
+
+                <!-- CARACTERÍSTICAS -->
+                <div style="margin-top: 10px;">
+                    <div class="controls-heading">✨ Características Principales</div>
+                    <ul id="modal-features-list" style="margin-left: 20px; font-size: 14px; color: var(--text-muted); line-height: 1.8;">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modal-fullscreen-btn">
+                    ⛶ Pantalla Completa
+                </button>
+                <button class="btn btn-accent" id="modal-download-action">
+                    📥 Descargar Archivos de Juego
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-notice" id="toast-notification">
+        Notificación
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/sound-fx.js"></script>
+    <script src="js/games-data.js"></script>
+    <script src="js/arcade-engine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
