@@ -32,7 +32,7 @@ const ARQUIVISUAL_GAMES = [
         playMode: "builtin",
         playUrl: "#builtin-arcade",
         downloadUrl: "#descargar-cyber-runner",
-        itchUrl: "https://itch.io",
+        itchUrl: "https://al652025.itch.io",
         tags: ["HTML5", "GDevelop Ready", "Arcade", "Cyberpunk", "Pixel/Neon"]
     },
     {
@@ -64,7 +64,7 @@ const ARQUIVISUAL_GAMES = [
         // Aquí puedes colocar la ruta relativa dentro de la carpeta /games/
         playUrl: "games/gdevelop-quest/index.html",
         downloadUrl: "https://itch.io",
-        itchUrl: "https://itch.io",
+        itchUrl: "https://al652025.itch.io",
         tags: ["GDevelop", "HTML5", "Plataformas", "Acción", "2D"]
     },
     {
@@ -95,7 +95,7 @@ const ARQUIVISUAL_GAMES = [
         playMode: "itch_embed",
         playUrl: "https://itch.io",
         downloadUrl: "https://itch.io",
-        itchUrl: "https://itch.io",
+        itchUrl: "https://al652025.itch.io",
         tags: ["Itch.io", "Arquitectura 3D", "Inmersivo", "Render", "Exploración"]
     },
     {
@@ -126,7 +126,7 @@ const ARQUIVISUAL_GAMES = [
         playMode: "gdevelop_local",
         playUrl: "games/velocity-matrix/index.html",
         downloadUrl: "https://itch.io",
-        itchUrl: "https://itch.io",
+        itchUrl: "https://al652025.itch.io",
         tags: ["GDevelop", "Arcade", "Carreras", "Synthwave", "Retro"]
     },
     {
@@ -157,7 +157,7 @@ const ARQUIVISUAL_GAMES = [
         playMode: "itch_embed",
         playUrl: "https://itch.io",
         downloadUrl: "https://itch.io",
-        itchUrl: "https://itch.io",
+        itchUrl: "https://al652025.itch.io",
         tags: ["Itch.io", "Puzzle", "Geometría", "Lógica", "Arte"]
     }
 ];
