@@ -29,31 +29,57 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentFilter = 'all';
     let currentSearchQuery = '';
 
+    const categoryBannerContainer = document.getElementById('category-banner-container');
+
     function renderGames() {
         if (!gamesGrid || !window.ARQUIVISUAL_GAMES) return;
 
-        let filtered = window.ARQUIVISUAL_GAMES.filter(game => {
-            // Filtro por categoría o motor
+        // Renderizar el Banner de la Categoría Activa
+        if (categoryBannerContainer && window.ARQUIVISUAL_CATEGORIES) {
+            const cat = window.ARQUIVISUAL_CATEGORIES[currentFilter];
+            if (cat) {
+                categoryBannerContainer.innerHTML = `
+                    <div class="category-banner-card" style="background: ${cat.gradient};">
+                        ${cat.bannerImg ? `<img src="${cat.bannerImg}" class="banner-bg-img" alt="${cat.title}" />` : ''}
+                        <div class="banner-content">
+                            <span class="banner-badge">${cat.badge}</span>
+                            <h3>${cat.icon} ${cat.title}</h3>
+                            <p>${cat.description}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Vista 'Todos'
+                categoryBannerContainer.innerHTML = `
+                    <div class="category-banner-card" style="background: linear-gradient(135deg, rgba(6,182,212,0.3) 0%, rgba(99,102,241,0.3) 50%, #0d111d 100%);">
+                        <img src="assets/banner-arquivisual.png" class="banner-bg-img" alt="Arquivisual Studios" />
+                        <div class="banner-content">
+                            <span class="banner-badge">✦ CATÁLOGO COMPLETO</span>
+                            <h3>CATÁLOGO ARQUIVISUAL STUDIOS</h3>
+                            <p>Explora nuestras 4 divisiones: <strong>Videojuegos</strong>, <strong>Mini Videojuegos</strong> para jugar online y descargar, <strong>Assets 3D</strong> y <strong>Game Systems</strong>.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        let filtered = window.ARQUIVISUAL_GAMES.filter(item => {
+            // Filtro por las 4 categorías oficiales
             let matchesFilter = true;
-            if (currentFilter === 'gdevelop') {
-                matchesFilter = game.engine.toLowerCase().includes('gdevelop');
-            } else if (currentFilter === 'itch') {
-                matchesFilter = game.engine.toLowerCase().includes('itch');
-            } else if (currentFilter === 'arcade') {
-                matchesFilter = game.category === 'arcade';
-            } else if (currentFilter === '3d') {
-                matchesFilter = game.category === '3d';
+            if (currentFilter !== 'all') {
+                matchesFilter = (item.category === currentFilter);
             }
 
             // Filtro por búsqueda de texto
             let matchesSearch = true;
             if (currentSearchQuery.trim()) {
                 const q = currentSearchQuery.toLowerCase();
-                const inTitle = game.title.toLowerCase().includes(q);
-                const inDesc = game.shortDesc.toLowerCase().includes(q) || game.description.toLowerCase().includes(q);
-                const inEngine = game.engine.toLowerCase().includes(q);
-                const inTags = game.tags.some(t => t.toLowerCase().includes(q));
-                matchesSearch = inTitle || inDesc || inEngine || inTags;
+                const inTitle = item.title.toLowerCase().includes(q);
+                const inDesc = item.shortDesc.toLowerCase().includes(q) || item.description.toLowerCase().includes(q);
+                const inEngine = item.engine.toLowerCase().includes(q);
+                const inCategory = (item.categoryName || '').toLowerCase().includes(q);
+                const inTags = item.tags.some(t => t.toLowerCase().includes(q));
+                matchesSearch = inTitle || inDesc || inEngine || inCategory || inTags;
             }
 
             return matchesFilter && matchesSearch;
@@ -62,67 +88,74 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filtered.length === 0) {
             gamesGrid.innerHTML = `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px dashed rgba(255,255,255,0.1);">
-                    <div style="font-size: 40px; margin-bottom: 12px;">🎮🔍</div>
-                    <h3 style="font-size: 22px; color: #fff; margin-bottom: 8px;">No se encontraron juegos</h3>
-                    <p style="color: #94a3b8; font-size: 14px;">Intenta cambiar el término de búsqueda o selecciona otro filtro.</p>
+                    <div style="font-size: 40px; margin-bottom: 12px;">🔍</div>
+                    <h3 style="font-size: 22px; color: #fff; margin-bottom: 8px;">No se encontraron elementos</h3>
+                    <p style="color: #94a3b8; font-size: 14px;">Intenta cambiar el término de búsqueda o selecciona otra categoría.</p>
                 </div>
             `;
             return;
         }
 
-        gamesGrid.innerHTML = filtered.map(game => `
-            <article class="game-card" data-id="${game.id}">
-                <div class="game-thumb" style="background: ${game.gradient}; position: relative; overflow: hidden;">
-                    ${game.coverImg ? `
-                        <img src="${game.coverImg}" class="game-thumb-img" alt="${game.title}" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease;" />
+        gamesGrid.innerHTML = filtered.map(item => {
+            const isGame = (item.category === 'videogames' || item.category === 'minigames');
+            const playLabel = isGame ? '▶ JUGAR ONLINE' : 'ℹ️ DETALLES';
+            const downloadLabel = (item.category === 'assets') ? '📥 DESCARGAR ASSET' :
+                                  (item.category === 'gamesystems') ? '📥 DESCARGAR PLANTILLA' : '📥 DESCARGAR';
+
+            return `
+            <article class="game-card" data-id="${item.id}">
+                <div class="game-thumb" style="background: ${item.gradient}; position: relative; overflow: hidden;">
+                    ${item.coverImg ? `
+                        <img src="${item.coverImg}" class="game-thumb-img" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease;" />
                         <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,11,18,0.85) 0%, transparent 60%); pointer-events: none;"></div>
                     ` : `
                         <svg class="game-thumb-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                             <defs>
-                                <linearGradient id="grad-${game.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <linearGradient id="grad-${item.id}" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
                                     <stop offset="100%" stop-color="#000000" stop-opacity="0.6"/>
                                 </linearGradient>
                             </defs>
-                            <rect width="100%" height="100%" fill="url(#grad-${game.id})"/>
+                            <rect width="100%" height="100%" fill="url(#grad-${item.id})"/>
                             <path d="M 0 150 L 400 150 M 0 170 L 400 170 M 0 190 L 400 190" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
                             <path d="M 200 130 L 0 200 M 200 130 L 100 200 M 200 130 L 200 200 M 200 130 L 300 200 M 200 130 L 400 200" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
                             <circle cx="200" cy="85" r="42" fill="rgba(0,0,0,0.35)" stroke="#fff" stroke-width="2"/>
                             <text x="200" y="94" font-family="'Rajdhani', sans-serif" font-size="28" font-weight="bold" fill="#fff" text-anchor="middle">
-                                ${game.isBuiltin ? '⚡' : (game.engine.includes('GDevelop') ? '🎮' : '🏛️')}
+                                ${item.category === 'assets' ? '📦' : (item.category === 'gamesystems' ? '⚙️' : (item.isBuiltin ? '⚡' : '🎮'))}
                             </text>
                         </svg>
                     `}
 
-                    <span class="game-badge">${game.badge}</span>
-                    <span class="game-engine-tag">${game.engine}</span>
+                    <span class="game-badge">${item.badge}</span>
+                    <span class="game-engine-tag">${item.categoryName || item.engine}</span>
                 </div>
 
                 <div class="game-info">
                     <div class="game-meta">
-                        <span class="game-rating">★ ${game.rating} (${game.playsCount} jugados)</span>
-                        <span>${game.version}</span>
+                        <span class="game-rating">★ ${item.rating} (${item.downloadsCount || item.playsCount})</span>
+                        <span>${item.version}</span>
                     </div>
 
-                    <h3 class="game-title">${game.title}</h3>
-                    <div class="game-subtitle">${game.subtitle}</div>
-                    <p class="game-desc">${game.shortDesc}</p>
+                    <h3 class="game-title">${item.title}</h3>
+                    <div class="game-subtitle">${item.subtitle}</div>
+                    <p class="game-desc">${item.shortDesc}</p>
 
                     <div class="game-tags">
-                        ${game.tags.map(t => `<span class="tag-item">${t}</span>`).join('')}
+                        ${item.tags.map(t => `<span class="tag-item">${t}</span>`).join('')}
                     </div>
 
                     <div class="game-actions">
-                        <button class="btn btn-primary btn-play-game" data-id="${game.id}">
-                            <span>▶ JUGAR</span>
+                        <button class="btn btn-primary btn-play-game" data-id="${item.id}">
+                            <span>${playLabel}</span>
                         </button>
-                        <button class="btn btn-secondary btn-download-game" data-id="${game.id}">
-                            <span>📥 DESCARGAR</span>
+                        <button class="btn btn-secondary btn-download-game" data-id="${item.id}">
+                            <span>${downloadLabel}</span>
                         </button>
                     </div>
                 </div>
             </article>
-        `).join('');
+            `;
+        }).join('');
 
         // Enganchar eventos a los botones recién renderizados
         attachCardEvents();
@@ -157,6 +190,22 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('active');
             currentFilter = btn.getAttribute('data-filter');
             renderGames();
+        });
+    });
+
+    // Enlaces de categoría en la barra de navegación superior
+    document.querySelectorAll('.nav-cat-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const cat = link.getAttribute('data-cat');
+            if (cat) {
+                if (window.soundFX) window.soundFX.click();
+                currentFilter = cat;
+                filterButtons.forEach(b => {
+                    if (b.getAttribute('data-filter') === cat) b.classList.add('active');
+                    else b.classList.remove('active');
+                });
+                renderGames();
+            }
         });
     });
 

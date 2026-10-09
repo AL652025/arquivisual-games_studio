@@ -38,15 +38,19 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="#hero" class="nav-link active"><span>🏠 Inicio</span></a></li>
-                    <li><a href="#catalogo" class="nav-link"><span>🎮 Catálogo</span></a></li>
-                    <li><a href="#arcade-section" class="nav-link"><span>🕹️ Arcade Online</span></a></li>
-                    <li><a href="#guia-subir" class="nav-link"><span>🚀 Cómo Subir Juegos</span></a></li>
+                    <li><a href="#catalogo" class="nav-link nav-cat-link" data-cat="videogames"><span>🎮 Videojuegos</span></a></li>
+                    <li><a href="#catalogo" class="nav-link nav-cat-link" data-cat="minigames"><span>🕹️ Mini Videojuegos</span></a></li>
+                    <li><a href="#catalogo" class="nav-link nav-cat-link" data-cat="assets"><span>📦 Assets</span></a></li>
+                    <li><a href="#catalogo" class="nav-link nav-cat-link" data-cat="gamesystems"><span>⚙️ Game Systems</span></a></li>
                 </ul>
             </nav>
 
             <div class="nav-actions">
                 <button id="sound-toggle-btn" class="btn-icon" title="Activar/Silenciar Sonido" aria-label="Toggle Sound">
                     🔊
+                </button>
+                <button id="nav-lock-studio-btn" class="btn-icon" title="Bloquear Acceso Privado" aria-label="Bloquear Acceso">
+                    🔒
                 </button>
                 <a href="#catalogo" class="btn btn-primary">
                     <span>JUGAR AHORA</span>
@@ -188,30 +192,35 @@
         <section id="catalogo" class="catalog-section" style="padding: 70px 0;">
             <div class="container">
                 <div class="section-header">
-                    <div class="section-tag">Colección Principal</div>
-                    <h2 class="section-title">TODOS LOS VIDEOJUEGOS</h2>
+                    <div class="section-tag">Catálogo Oficial</div>
+                    <h2 class="section-title">EXPLORA NUESTRAS 4 CATEGORÍAS</h2>
                     <p class="section-desc">
-                        Descubre títulos listos para jugar al instante en el navegador o descargar a tu ordenador. Filtrables por motor gráfico y categoría.
+                        Videojuegos completos, mini videojuegos para jugar online y descargar, assets 3D de alta calidad y sistemas de juego modulares.
                     </p>
                 </div>
 
-                <!-- CONTROLES DE FILTRO Y BÚSQUEDA -->
+                <!-- CONTROLES DE FILTRO POR LAS 4 CATEGORÍAS -->
                 <div class="catalog-controls">
                     <div class="filter-group">
-                        <button class="filter-btn active" data-filter="all">Todos los Juegos</button>
-                        <button class="filter-btn" data-filter="gdevelop">🎮 GDevelop HTML5</button>
-                        <button class="filter-btn" data-filter="itch">🌐 Itch.io</button>
-                        <button class="filter-btn" data-filter="3d">🏛️ Arquitectura 3D</button>
-                        <button class="filter-btn" data-filter="arcade">⚡ Arcade & Velocidad</button>
+                        <button class="filter-btn active" data-filter="all">🔥 Todos</button>
+                        <button class="filter-btn" data-filter="videogames">🎮 Videojuegos</button>
+                        <button class="filter-btn" data-filter="minigames">🕹️ Mini Videojuegos</button>
+                        <button class="filter-btn" data-filter="assets">📦 Assets</button>
+                        <button class="filter-btn" data-filter="gamesystems">⚙️ Game Systems</button>
                     </div>
 
                     <div class="search-box">
                         <span class="search-icon">🔍</span>
-                        <input type="text" id="search-games-input" class="search-input" placeholder="Buscar por título, tag o motor...">
+                        <input type="text" id="search-games-input" class="search-input" placeholder="Buscar título, asset o sistema...">
                     </div>
                 </div>
 
-                <!-- GRID DINÁMICO DE JUEGOS -->
+                <!-- BANNER DE LA CATEGORÍA ACTIVA (CADA UNO CON SU BANNER) -->
+                <div id="category-banner-container">
+                    <!-- Renderizado dinámicamente desde app.js -->
+                </div>
+
+                <!-- GRID DINÁMICO DE JUEGOS, ASSETS Y SISTEMAS -->
                 <div class="games-grid" id="games-grid">
                     <!-- Renderizado dinámico desde app.js -->
                 </div>
@@ -368,10 +377,30 @@
         Notificación
     </div>
 
+    <!-- MODAL DE SEGURIDAD Y BLOQUEO PRIVADO -->
+    <div id="security-gate" class="security-gate-overlay" style="display: none;">
+        <div class="security-gate-card">
+            <div class="security-shield-icon">🔒</div>
+            <h2>PANEL PRIVADO</h2>
+            <div class="security-tag">ARQUIVISUAL GAMES STUDIOS</div>
+            <p>Acceso restringido para el creador y personal autorizado. Ingresa tu clave para desbloquear el panel:</p>
+            <div class="security-input-group">
+                <input type="password" id="gate-pass-input" placeholder="Ingresa clave (ej: 652025)..." autocomplete="off">
+                <button id="gate-unlock-btn" class="btn btn-primary">ENTRAR</button>
+            </div>
+            <div id="gate-error-msg" class="gate-error"></div>
+            <div class="gate-hint">
+                <span>Claves: <code>652025</code> o <code>ARQUI2026</code></span>
+                <button id="gate-change-pin-btn" style="background: none; border: none; color: var(--neon-cyan); cursor: pointer; text-decoration: underline; font-size: 11px;">Cambiar Clave</button>
+            </div>
+        </div>
+    </div>
+
     <!-- SCRIPTS -->
     <script src="js/sound-fx.js"></script>
     <script src="js/games-data.js"></script>
     <script src="js/arcade-engine.js"></script>
+    <script src="js/security-gate.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
