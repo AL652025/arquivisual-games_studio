@@ -354,22 +354,38 @@ body {
     border-radius: var(--radius-md);
     overflow: hidden;
     border: 1px solid var(--border-glass);
-    background: var(--bg-card);
+    background: #090b14;
     aspect-ratio: 16 / 9;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 16px;
+    display: block;
     cursor: pointer;
     transition: var(--transition-smooth);
     text-decoration: none;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
 .small-banner-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--neon-cyan);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.7), 0 0 20px rgba(6, 182, 212, 0.35);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 14px 35px rgba(0,0,0,0.8);
+}
+
+.small-banner-card[data-cat="videogames"]:hover {
+    border-color: #06b6d4;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.8), 0 0 25px rgba(6, 182, 212, 0.45);
+}
+
+.small-banner-card[data-cat="minigames"]:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.8), 0 0 25px rgba(245, 158, 11, 0.45);
+}
+
+.small-banner-card[data-cat="assets"]:hover {
+    border-color: #10b981;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.8), 0 0 25px rgba(16, 185, 129, 0.45);
+}
+
+.small-banner-card[data-cat="gamesystems"]:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.8), 0 0 25px rgba(56, 189, 248, 0.45);
 }
 
 .small-banner-card::before {
@@ -382,23 +398,18 @@ body {
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255, 255, 255, 0.2),
-        rgba(6, 182, 212, 0.3),
+        rgba(255, 255, 255, 0.25),
+        rgba(6, 182, 212, 0.35),
         transparent
     );
     transform: rotate(25deg);
     z-index: 4;
-    transition: left 0.6s ease;
+    transition: left 0.7s ease;
     pointer-events: none;
 }
 
 .small-banner-card:hover::before {
     left: 150%;
-}
-
-@keyframes pulseDot {
-    0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 4px var(--neon-cyan)); }
-    50% { opacity: 0.3; transform: scale(0.8); }
 }
 
 .small-banner-card img {
@@ -408,53 +419,39 @@ body {
     height: 100%;
     object-fit: cover;
     z-index: 1;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
 }
 
 .small-banner-card:hover img {
-    transform: scale(1.06);
+    transform: scale(1.04);
 }
 
-.small-banner-overlay {
+.small-banner-hover-tag {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(10, 11, 18, 0.95) 0%, rgba(10, 11, 18, 0.3) 60%, transparent 100%);
-    z-index: 2;
-}
-
-.small-banner-info {
-    position: relative;
-    z-index: 3;
-}
-
-.small-banner-badge {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: var(--radius-full);
-    display: inline-block;
-    margin-bottom: 4px;
-}
-
-.small-banner-title {
-    font-family: var(--font-heading);
-    font-size: 16px;
-    font-weight: 800;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(10, 11, 18, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: #fff;
-    line-height: 1.2;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    z-index: 5;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
 }
 
-.badge-paypal {
-    background: rgba(245, 158, 11, 0.2);
-    color: #f59e0b;
-    border: 1px solid rgba(245, 158, 11, 0.5);
-}
-
-.badge-free {
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.5);
+.small-banner-card:hover .small-banner-hover-tag {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
 }
 
 @media (max-width: 968px) {
