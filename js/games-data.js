@@ -134,35 +134,36 @@ const ARQUIVISUAL_GAMES = [
         tags: ["Arquitectura 3D", "Inmersivo", "WebGL", "Exploración"]
     },
     {
-        id: "hop-hop-islands-wip",
-        title: "HOP HOP ISLANDS: EXPEDICIÓN VOLCÁNICA",
-        subtitle: "Expansión en Producción - Nuevos Mundos & Retos",
+        id: "charlie-the-frog-wip",
+        title: "CHARLIE THE FROG ADVENTURES",
+        subtitle: "Aventura en la Selva & Plataformas 3D - En Producción",
         category: "videogames",
         categoryName: "Videojuegos",
-        engine: "Unity & WebGL 3D",
+        engine: "Unity & GDevelop 3D",
         isBuiltin: false,
         isWip: true,
-        wipPercent: 70,
+        wipPercent: 65,
         badge: "🚧 WORK IN PROGRESS",
-        version: "Alpha v0.5",
+        version: "Early Beta v0.3",
         rating: 5.0,
         playsCount: "En producción",
-        downloadsCount: "70% Listo",
-        gradient: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
-        coverImg: "https://img.itch.zone/aW1nLzMwNjY3MTM5LnBuZw==/original/VR15Tv.png",
-        shortDesc: "Expansión directa con nuevos biomas volcánicos, plataformas con gravedad variable, física de lava ascendente y modo contrarreloj.",
-        description: "Proyecto en pleno desarrollo activo por Arquivisual Games Studios. Próximamente disponible para jugar en navegador y descargar para PC y móviles.",
+        downloadsCount: "Coming Soon",
+        gradient: "linear-gradient(135deg, #15803d 0%, #166534 50%, #064e3b 100%)",
+        coverImg: "assets/charlie-the-frog.png",
+        shortDesc: "Acompaña a Charlie la rana en una odisea a través de pantanos misteriosos, aldeas arbóreas y lagos nocturnos. Banda sonora oficial y próximamente en Itch.io.",
+        description: "El nuevo videojuego oficial de Arquivisual Games Studios. Charlie The Frog Adventures combina exploración en 3D, saltos acrobáticos, música original compuesta para el videojuego y una atmósfera nocturna inmersiva.",
         features: [
-            "Físicas de lava ascendente y plataformas de calor dinámico",
-            "Modelado 3D de alta precisión realizado en Blender",
-            "Nuevas skins exclusivas y estelas mágicas de partículas",
-            "Optimizaciones WebGL para máxima fluidez a 60 FPS"
+            "Música y banda sonora oficial compuesta para el videojuego",
+            "Físicas dinámicas de salto acrobático y exploración vertical",
+            "Entornos nocturnos detallados con aldeas y pantanos bajo la luna",
+            "Lanzamiento confirmado muy pronto en la tienda oficial de Itch.io"
         ],
         controls: {
-            pc: "En desarrollo (Compatible con teclado y gamepad)",
+            pc: "En desarrollo (Compatible con Teclado & Gamepad)",
             mobile: "En desarrollo (Controles táctiles optimizados)"
         },
-        tags: ["Work In Progress", "3D", "Arcade", "Unity", "Blender", "Próximamente"]
+        itchUrl: "https://arquivisualgames.itch.io",
+        tags: ["Work In Progress", "3D", "Plataformas", "Aventura", "Itch.io", "Early Beta"]
     },
 
     // -------------------------------------------------------------
