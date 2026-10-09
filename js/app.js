@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span>💳 COMPRAR (${item.price})</span>
                             </button>
                             <button class="btn btn-secondary btn-download-game" data-id="${item.id}">
-                                <span>ℹ️ DETALLES</span>
+                                <span>${item.modelUrl ? '👁️ VER 3D / INFO' : 'ℹ️ DETALLES'}</span>
                             </button>
                         ` : `
                             <button class="btn btn-primary btn-play-game" data-id="${item.id}">
@@ -221,37 +221,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (window.soundFX) window.soundFX.collect();
 
+        const priceNum = item.paypalAmount || (item.price ? item.price.replace(/[^0-9.]/g, '') : '4');
+        const paypalDirectUrl = item.paypalUrl || `https://www.paypal.me/albertoeizzi/${priceNum}`;
+
         modalTitle.textContent = `Checkout Seguro: ${item.title}`;
-        modalControlsDesc.textContent = `Método de pago: PayPal (@albertoeizzi.com) | Licencia comercial incluida.`;
+        modalControlsDesc.textContent = `Método de pago: PayPal (@albertoeizzi.com) | Formato: ${item.engine || 'Recurso Digital'}`;
         modalFeaturesList.innerHTML = `
             <li>Producto: <strong>${item.title}</strong></li>
             <li>Categoría: <strong>${item.categoryName}</strong></li>
-            <li>Precio: <strong style="color: #f59e0b; font-size: 16px;">${item.price}</strong></li>
-            <li>Cuenta de destino PayPal: <strong>albertoeizzi.com</strong></li>
+            <li>Formato: <strong>${item.engine}</strong></li>
+            <li>Precio Total: <strong style="color: #f59e0b; font-size: 16px;">${item.price}</strong></li>
+            <li>Cuenta oficial PayPal: <strong>albertoeizzi.com</strong> (@albertoeizzi.com)</li>
             <li>Licencia comercial completa para utilizar en videojuegos y proyectos</li>
             <li>Entrega de archivos y soporte directo del estudio</li>
         `;
 
         modalViewport.innerHTML = `
-            <div style="padding: 35px 20px; text-align: center; background: #080b14;">
-                <div style="display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 112, 186, 0.15); border: 2px solid #0070ba; font-size: 34px; margin-bottom: 14px;">
-                    💳
-                </div>
-                <h3 style="font-size: 24px; color: #fff; margin-bottom: 4px;">Comprar ${item.title}</h3>
-                <div style="font-size: 26px; font-weight: 900; color: #f59e0b; margin-bottom: 12px;">${item.price}</div>
-                <p style="color: #94a3b8; max-width: 500px; margin: 0 auto 20px; font-size: 14px;">
+            <div style="padding: 24px 20px; text-align: center; background: #080b14;">
+                ${item.modelUrl ? `
+                    <div style="max-width: 500px; margin: 0 auto 16px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 8px 30px rgba(0,0,0,0.7); position: relative;">
+                        <model-viewer src="${item.modelUrl}" poster="${item.coverImg}" alt="${item.title}" auto-rotate camera-controls shadow-intensity="1" style="width: 100%; height: 260px; background: radial-gradient(circle, #092117 0%, #050b14 100%); display: block;"></model-viewer>
+                        <div style="position: absolute; bottom: 8px; right: 12px; background: rgba(0,0,0,0.75); padding: 4px 10px; border-radius: 6px; font-size: 11px; color: #10b981; pointer-events: none; border: 1px solid rgba(16,185,129,0.3);">
+                            🔄 Arrastra para girar en 3D (.GLB)
+                        </div>
+                    </div>
+                ` : (item.coverImg ? `
+                    <div style="max-width: 440px; margin: 0 auto 16px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 8px 30px rgba(0,0,0,0.7); background: #000;">
+                        <img src="${item.coverImg}" alt="${item.title}" style="width: 100%; height: auto; max-height: 240px; object-fit: contain; display: block;" />
+                    </div>
+                ` : `
+                    <div style="display: inline-flex; align-items: center; justify-content: center; width: 68px; height: 68px; border-radius: 50%; background: rgba(0, 112, 186, 0.15); border: 2px solid #0070ba; font-size: 32px; margin-bottom: 12px;">
+                        💳
+                    </div>
+                `)}
+                <h3 style="font-size: 22px; color: #fff; margin-bottom: 4px;">Comprar ${item.title}</h3>
+                <div style="font-size: 28px; font-weight: 900; color: #f59e0b; margin-bottom: 10px;">${item.price}</div>
+                <p style="color: #94a3b8; max-width: 500px; margin: 0 auto 16px; font-size: 14px;">
                     Haz clic en el botón inferior para completar tu pago de forma segura a través de <strong>PayPal</strong> a la cuenta oficial <strong>@albertoeizzi.com</strong>.
                 </p>
-                <div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto;">
-                    <a href="https://www.paypal.com/paypalme/albertoeizzi" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #0070ba, #003087); padding: 14px 24px; font-size: 16px; justify-content: center; box-shadow: 0 4px 20px rgba(0,112,186,0.5);">
-                        <span>💳 PAGAR CON PAYPAL (@albertoeizzi.com)</span>
+                <div style="display: flex; flex-direction: column; gap: 10px; max-width: 420px; margin: 0 auto;">
+                    <a href="${paypalDirectUrl}" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #0070ba, #003087); padding: 14px 24px; font-size: 15px; justify-content: center; box-shadow: 0 4px 20px rgba(0,112,186,0.5);">
+                        <span>💳 PAGAR ${item.price} VÍA PAYPAL (@albertoeizzi.com)</span>
                     </a>
-                    <a href="${item.itchUrl}" target="_blank" class="btn btn-secondary" style="font-size: 13px; justify-content: center;">
-                        <span>🌐 Ver en Itch.io</span>
+                    <a href="https://www.paypal.com/paypalme/albertoeizzi" target="_blank" class="btn btn-secondary" style="font-size: 12px; justify-content: center;">
+                        <span>🌐 Enlace directo PayPal.Me (@albertoeizzi)</span>
                     </a>
                 </div>
-                <div style="margin-top: 18px; font-size: 12px; color: #64748b;">
-                    🔒 Conexión cifrada SSL • Cuenta verificada PayPal: <code>albertoeizzi.com</code>
+                <div style="margin-top: 16px; font-size: 12px; color: #64748b;">
+                    🔒 Conexión segura SSL • Cuenta verificada PayPal: <code>albertoeizzi.com</code>
                 </div>
             </div>
         `;
@@ -411,6 +428,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function openDownloadModal(gameId) {
         const game = window.ARQUIVISUAL_GAMES.find(g => g.id === gameId);
         if (!game) return;
+
+        if (game.isPaid) {
+            openPayPalCheckout(gameId);
+            return;
+        }
 
         showToast(`📦 Abriendo opciones de descarga para "${game.title}"...`);
 

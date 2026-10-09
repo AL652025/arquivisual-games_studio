@@ -41,7 +41,7 @@ const ARQUIVISUAL_CATEGORIES = {
         gradient: "linear-gradient(135deg, #059669 0%, #10b981 50%, #064e3b 100%)",
         icon: "📦",
         bannerImg: "assets/banner-assets.png",
-        description: "Paquetes de recursos optimizados para creadores en Blender, GDevelop, Unity y Godot. Descarga directa en formatos estándar (.blend, .fbx, .png)."
+        description: "Paquetes de recursos optimizados para creadores en Blender, GDevelop, Unity, Godot y Roblox. Descarga directa en formatos estándar (.glb, .blend, .fbx, .png)."
     },
     gamesystems: {
         id: "gamesystems",
@@ -308,6 +308,51 @@ const ARQUIVISUAL_GAMES = [
     // -------------------------------------------------------------
     // 3. ASSETS (Recursos 3D, Texturas, UI, Sprites - PAGOS VÍA PAYPAL)
     // -------------------------------------------------------------
+    {
+        id: "asset-arboles-ancestrales-glb",
+        title: "PORTAL ÁRBOLES ANCESTRALES 3D (.GLB)",
+        subtitle: "Asset 3D de Naturaleza & Entorno Fantasía - Formato GLB",
+        category: "assets",
+        categoryName: "Assets",
+        engine: "Modelo 3D (.GLB / glTF)",
+        modelUrl: "assets/models/arboles-ancestrales.glb",
+        isBuiltin: false,
+        isPaid: true,
+        price: "$4.00 USD",
+        paypalAmount: "4",
+        paypalAccount: "albertoeizzi.com",
+        paypalUrl: "https://www.paypal.me/albertoeizzi/4",
+        badge: "💳 $4.00 USD (PAYPAL)",
+        version: "v1.0 (GLB)",
+        rating: 5.0,
+        playsCount: "Nuevo",
+        downloadsCount: "Disponible",
+        gradient: "linear-gradient(135deg, #064e3b 0%, #059669 50%, #10b981 100%)",
+        coverImg: "assets/asset-fantasy-trees.jpg",
+        bannerImg: "assets/asset-fantasy-trees.jpg",
+        shortDesc: "Arco de dos árboles ancestrales de fantasía con musgo, lianas colgantes y sendero natural de tierra en formato binario estándar .GLB.",
+        description: "Asset 3D estilizado de alta calidad para entornos de bosque mágico, portales de naturaleza y cinemáticas. Empaquetado en formato universal binario .GLB (glTF 2.0) con texturas y geometría integradas. Compatible con Blender, Unity, Unreal Engine, Godot, Roblox y visores web Three.js / Babylon.js.",
+        features: [
+            "Formato universal binario .GLB (glTF 2.0) listo para importar",
+            "Doble árbol ancestral con ramas entrelazadas y sendero central",
+            "Texturas PBR integradas (Albedo, Rugosidad, Normales y AO)",
+            "Optimizado para videojuegos, mundos virtuales y renders",
+            "Licencia comercial de por vida incluida con tu compra",
+            "Pago seguro y directo vía PayPal: $4.00 USD (@albertoeizzi.com)"
+        ],
+        controls: {
+            pc: "Importa el archivo .GLB con 'File > Import > glTF 2.0 (.glb/.gltf)' en Blender, Unity o Unreal",
+            mobile: "Visualizable en cualquier navegador móvil compatible con WebGL / Model-Viewer"
+        },
+        playMode: "external",
+        playUrl: "https://www.paypal.me/albertoeizzi/4",
+        downloadUrl: "https://www.paypal.me/albertoeizzi/4",
+        itchUrl: "https://arquivisualgames.itch.io",
+        downloads: [
+            { name: "Comprar Modelo 3D .GLB ($4 USD)", file: "Arboles_Ancestrales_3D.glb", size: "Formato .GLB", url: "https://www.paypal.me/albertoeizzi/4" }
+        ],
+        tags: ["Assets", "GLB", "Modelos 3D", "$4 USD", "PayPal", "Naturaleza", "Fantasía", "Blender", "Unity"]
+    },
     {
         id: "asset-sci-fi-props",
         title: "PACK PROPS ARQUITECTURA SCI-FI 3D",
