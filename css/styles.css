@@ -533,15 +533,17 @@ body {
     justify-content: center;
 }
 
-.game-thumb-svg {
+.game-thumb-svg,
+.game-thumb-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
 
-.game-card:hover .game-thumb-svg {
-    transform: scale(1.05);
+.game-card:hover .game-thumb-svg,
+.game-card:hover .game-thumb-img {
+    transform: scale(1.06);
 }
 
 .game-badge {
@@ -925,6 +927,11 @@ body {
     }
     .games-grid {
         grid-template-columns: 1fr;
+    }
+    .spotlight-card {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        padding: 24px !important;
     }
     .footer-grid {
         grid-template-columns: 1fr;

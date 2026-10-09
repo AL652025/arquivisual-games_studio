@@ -5,13 +5,60 @@
 
 const ARQUIVISUAL_GAMES = [
     {
+        id: "hop-hop-islands",
+        title: "HOP HOP ISLANDS",
+        subtitle: "Aventura 3D Arcade - Reconstruye el Gran Arcoíris",
+        engine: "Itch.io (HTML5 & 3D)",
+        category: "3d",
+        isBuiltin: false,
+        badge: "⭐ DESTACADO OFICIAL",
+        version: "v1.1.0",
+        rating: 5.0,
+        playsCount: "25.8K",
+        downloadsCount: "4.2K",
+        gradient: "linear-gradient(135deg, #0284c7 0%, #f43f5e 100%)",
+        coverImg: "https://img.itch.zone/aW1nLzMwNjY2NjA0LnBuZw==/508x254%23mb/BT%2B9r7.png",
+        bannerImg: "https://img.itch.zone/aW1nLzMwNjY3MTM5LnBuZw==/original/VR15Tv.png",
+        trailerUrl: "https://www.youtube.com/embed/Vd28aatsYv4",
+        screenshots: [
+            "https://img.itch.zone/aW1hZ2UvNTEyMjU0MS8zMDY2NjYwNi5wbmc=/original/16qDbq.png",
+            "https://img.itch.zone/aW1hZ2UvNTEyMjU0MS8zMDY5MDAzOC5wbmc=/original/m1Pc%2By.png",
+            "https://img.itch.zone/aW1hZ2UvNTEyMjU0MS8zMDY5MDAzNS5wbmc=/original/oM09Zd.png",
+            "https://img.itch.zone/aW1hZ2UvNTEyMjU0MS8zMDY5MDAzNy5wbmc=/original/fMM207.png",
+            "https://img.itch.zone/aW1hZ2UvNTEyMjU0MS8zMDY5MDAzNi5wbmc=/original/LHVFbY.png"
+        ],
+        shortDesc: "El Gran Arcoíris se ha roto y sus gemas están esparcidas por las Islas Pastel flotantes. ¡Ayuda a Pip a saltar de isla en isla y reconstruirlo!",
+        description: "Un juego oficial creado por ARQUIVISUAL GAMES. Mantén presionado para cargar el salto y suelta para saltar. Cae en el centro exacto para lograr un 'PERFECT' y encadenar combos increíbles. ¡Incluye 4 mundos dinámicos, skins desbloqueables y final triunfal con el gran arcoíris de diamantes!",
+        features: [
+            "Jugabilidad 'One-touch' adictiva: mantén para cargar y suelta para saltar",
+            "4 niveles con metas dinámicas (100 / 200 / 500 / 800 puntos)",
+            "Islas móviles, islas con musgo y plataformas que suben y bajan",
+            "Desbloquea 6 apariencias adorables para Pip recogiendo gemas",
+            "Banda sonora original, efectos de sonido y voz para Pip",
+            "Disponible para jugar en navegador (PC y móvil) o descarga a PC y Android"
+        ],
+        controls: {
+            pc: "Mantén presionado ESPACIO / W / Flecha Arriba o Clic Izquierdo y suelta para saltar | M = Silenciar",
+            mobile: "Toca y mantén cualquier punto de la pantalla, suelta para saltar"
+        },
+        playMode: "itch_embed",
+        playUrl: "https://html-classic.itch.zone/html/19653865/index.html?v=1791552549",
+        itchUrl: "https://arquivisualgames.itch.io/hop-hop-islands",
+        downloadUrl: "https://arquivisualgames.itch.io/hop-hop-islands#download",
+        downloads: [
+            { name: "Windows 64-bit (.ZIP)", file: "HopHopIslands_Windows.zip", size: "30 MB", url: "https://arquivisualgames.itch.io/hop-hop-islands/purchase" },
+            { name: "Android APK (7.1+)", file: "HopHopIslands_Android.apk", size: "21 MB", url: "https://arquivisualgames.itch.io/hop-hop-islands/purchase" }
+        ],
+        tags: ["Itch.io", "3D", "Arcade", "Casual", "Unity", "HTML5", "Android"]
+    },
+    {
         id: "cyber-runner",
         title: "CYBER ARQUITECTO: MATRIX RUN",
         subtitle: "Arcade Sci-Fi & Geometría Espacial",
         engine: "Arquivisual Engine (HTML5)",
         category: "arcade",
         isBuiltin: true,
-        badge: "🔥 JUGABLE AQUÍ",
+        badge: "⚡ JUGABLE EN PORTADA",
         version: "v1.2.0",
         rating: 4.9,
         playsCount: "14.2K",
@@ -32,7 +79,7 @@ const ARQUIVISUAL_GAMES = [
         playMode: "builtin",
         playUrl: "#builtin-arcade",
         downloadUrl: "#descargar-cyber-runner",
-        itchUrl: "https://al652025.itch.io",
+        itchUrl: "https://arquivisualgames.itch.io",
         tags: ["HTML5", "GDevelop Ready", "Arcade", "Cyberpunk", "Pixel/Neon"]
     },
     {

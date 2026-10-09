@@ -72,25 +72,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         gamesGrid.innerHTML = filtered.map(game => `
             <article class="game-card" data-id="${game.id}">
-                <div class="game-thumb" style="background: ${game.gradient};">
-                    <!-- Arte vectorial SVG representativo -->
-                    <svg class="game-thumb-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="grad-${game.id}" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
-                                <stop offset="100%" stop-color="#000000" stop-opacity="0.6"/>
-                            </linearGradient>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#grad-${game.id})"/>
-                        <!-- Cuadrícula perspectiva -->
-                        <path d="M 0 150 L 400 150 M 0 170 L 400 170 M 0 190 L 400 190" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                        <path d="M 200 130 L 0 200 M 200 130 L 100 200 M 200 130 L 200 200 M 200 130 L 300 200 M 200 130 L 400 200" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                        <!-- Icono central estilizado -->
-                        <circle cx="200" cy="85" r="42" fill="rgba(0,0,0,0.35)" stroke="#fff" stroke-width="2"/>
-                        <text x="200" y="94" font-family="'Rajdhani', sans-serif" font-size="28" font-weight="bold" fill="#fff" text-anchor="middle">
-                            ${game.isBuiltin ? '⚡' : (game.engine.includes('GDevelop') ? '🎮' : '🏛️')}
-                        </text>
-                    </svg>
+                <div class="game-thumb" style="background: ${game.gradient}; position: relative; overflow: hidden;">
+                    ${game.coverImg ? `
+                        <img src="${game.coverImg}" class="game-thumb-img" alt="${game.title}" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease;" />
+                        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,11,18,0.85) 0%, transparent 60%); pointer-events: none;"></div>
+                    ` : `
+                        <svg class="game-thumb-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="grad-${game.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+                                    <stop offset="100%" stop-color="#000000" stop-opacity="0.6"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#grad-${game.id})"/>
+                            <path d="M 0 150 L 400 150 M 0 170 L 400 170 M 0 190 L 400 190" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                            <path d="M 200 130 L 0 200 M 200 130 L 100 200 M 200 130 L 200 200 M 200 130 L 300 200 M 200 130 L 400 200" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                            <circle cx="200" cy="85" r="42" fill="rgba(0,0,0,0.35)" stroke="#fff" stroke-width="2"/>
+                            <text x="200" y="94" font-family="'Rajdhani', sans-serif" font-size="28" font-weight="bold" fill="#fff" text-anchor="middle">
+                                ${game.isBuiltin ? '⚡' : (game.engine.includes('GDevelop') ? '🎮' : '🏛️')}
+                            </text>
+                        </svg>
+                    `}
 
                     <span class="game-badge">${game.badge}</span>
                     <span class="game-engine-tag">${game.engine}</span>
@@ -208,8 +210,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             }, 50);
+        } else if (game.id === 'hop-hop-islands') {
+            // Juego Oficial Itch.io: Hop Hop Islands con soporte para Iframe interactivo y Trailer
+            modalViewport.innerHTML = `
+                <div style="position: relative; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <iframe 
+                        id="hop-hop-iframe"
+                        src="${game.playUrl}" 
+                        style="width: 100%; height: 100%; border: none; background: #cfeafb;" 
+                        allow="autoplay; fullscreen *; gamepad; accelerometer; gyroscope" 
+                        allowfullscreen="true">
+                    </iframe>
+                </div>
+            `;
         } else {
-            // Embebido de GDevelop o itch.io
+            // Embebido de GDevelop o itch.io genérico
             modalViewport.innerHTML = `
                 <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0f121e; text-align: center; padding: 30px;">
                     <div style="font-size: 52px; margin-bottom: 15px;">🎮</div>
@@ -263,34 +278,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const game = window.ARQUIVISUAL_GAMES.find(g => g.id === gameId);
         if (!game) return;
 
-        showToast(`📦 Iniciando panel de descarga para "${game.title}"...`);
+        showToast(`📦 Abriendo opciones de descarga para "${game.title}"...`);
 
-        // Abrir modal con opciones de descarga
         modalTitle.textContent = `Descargar: ${game.title}`;
-        modalControlsDesc.textContent = `Requisitos del Sistema: Windows 10/11 (64-bit), 4GB RAM, Soporte WebGL 2.0 / DirectX 11.`;
+        modalControlsDesc.textContent = `Plataformas compatibles: Windows 10/11 (64-bit), Android APK, Navegador HTML5.`;
         modalFeaturesList.innerHTML = `
             <li>Versión disponible: <strong>${game.version}</strong></li>
-            <li>Formato: Paquete instalador .EXE y versión portátil .ZIP</li>
-            <li>Exportado desde: <strong>${game.engine}</strong></li>
-            <li>Seguridad: Verificado sin malware / Compatible con SmartScreen</li>
+            <li>Desarrollador: <strong>ARQUIVISUAL GAME STUDIOS</strong></li>
+            <li>Archivos oficiales disponibles para Windows y Android</li>
+            <li>Verificado y sin anuncios intrusivos</li>
         `;
 
+        const downloadButtonsHtml = game.downloads && game.downloads.length > 0 ? 
+            game.downloads.map(d => `
+                <a href="${d.url}" target="_blank" class="btn btn-primary" style="justify-content: space-between; padding: 14px 20px;">
+                    <span>💾 ${d.name}</span>
+                    <span style="font-size: 12px; opacity: 0.8; background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 6px;">${d.size}</span>
+                </a>
+            `).join('') : `
+                <a href="${game.downloadUrl}" class="btn btn-primary" onclick="simulateDownload(event, '${game.title}', 'Windows .EXE')">
+                    💻 Descargar para Windows (.exe) - 64-bit
+                </a>
+                <a href="${game.downloadUrl}" class="btn btn-secondary" onclick="simulateDownload(event, '${game.title}', 'Portable .ZIP')">
+                    📦 Descargar Paquete Comprimido (.zip)
+                </a>
+            `;
+
         modalViewport.innerHTML = `
-            <div style="padding: 40px 20px; text-align: center; background: #0a0b12;">
-                <div style="font-size: 56px; margin-bottom: 16px;">💾</div>
-                <h3 style="font-size: 26px; color: #fff; margin-bottom: 12px;">Descarga ${game.title}</h3>
-                <p style="color: #94a3b8; max-width: 500px; margin: 0 auto 28px; font-size: 15px;">
-                    Elige el formato de tu preferencia para disfrutar de este título sin conexión.
+            <div style="padding: 35px 20px; text-align: center; background: #0a0b12;">
+                ${game.bannerImg ? `
+                    <img src="${game.bannerImg}" alt="${game.title}" style="max-height: 120px; margin: 0 auto 20px; border-radius: 10px; display: block;" />
+                ` : `
+                    <div style="font-size: 56px; margin-bottom: 16px;">💾</div>
+                `}
+                <h3 style="font-size: 26px; color: #fff; margin-bottom: 8px;">Descarga ${game.title}</h3>
+                <p style="color: #94a3b8; max-width: 520px; margin: 0 auto 24px; font-size: 14px;">
+                    Elige la versión para tu dispositivo o descarga directamente desde la tienda oficial de Itch.io.
                 </p>
-                <div style="display: flex; flex-direction: column; gap: 14px; max-width: 420px; margin: 0 auto;">
-                    <a href="${game.downloadUrl}" class="btn btn-primary" onclick="simulateDownload(event, '${game.title}', 'Windows .EXE')">
-                        💻 Descargar para Windows (.exe) - 64-bit
-                    </a>
-                    <a href="${game.downloadUrl}" class="btn btn-secondary" onclick="simulateDownload(event, '${game.title}', 'Portable .ZIP')">
-                        📦 Descargar Paquete Comprimido (.zip)
-                    </a>
-                    <a href="${game.itchUrl}" target="_blank" class="btn btn-accent">
-                        🌐 Descargar o Apoyar en Itch.io
+                <div style="display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto;">
+                    ${downloadButtonsHtml}
+                    <a href="${game.itchUrl}" target="_blank" class="btn btn-accent" style="margin-top: 6px;">
+                        🌐 Ver ficha completa y donar en Itch.io
                     </a>
                 </div>
             </div>
