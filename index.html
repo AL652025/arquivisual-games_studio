@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=20261009_assets_showcase">
     <link rel="icon" type="image/png" href="assets/banner-arquivisual.png">
 
     <!-- 3D Model Viewer para Assets GLB -->
@@ -43,7 +43,7 @@
                     <li><a href="#hero" class="nav-link active"><span>🏠 Inicio</span></a></li>
                     <li><a href="#catalogo" class="nav-link nav-cat-link" data-cat="videogames"><span>🎮 Videojuegos</span></a></li>
                     <li><a href="#catalogo" class="nav-link nav-cat-link" data-cat="minigames"><span>🕹️ Mini Videojuegos</span></a></li>
-                    <li><a href="#catalogo" class="nav-link nav-cat-link" data-cat="assets"><span>📦 Assets</span></a></li>
+                    <li><a href="#sector-assets-destacado" class="nav-link nav-cat-link" data-cat="assets"><span>📦 Assets ($4 USD)</span></a></li>
                     <li><a href="#catalogo" class="nav-link nav-cat-link" data-cat="gamesystems"><span>⚙️ Game Systems</span></a></li>
                     <li><a href="#work-in-progress" class="nav-link"><span>🚧 En Desarrollo</span></a></li>
                 </ul>
@@ -84,9 +84,9 @@
                         <img src="assets/banner-minigames.png" alt="Mini Videojuegos - Gratis Jugar Directo 60 FPS" loading="lazy">
                         <span class="small-banner-hover-tag">JUGAR ONLINE ➔</span>
                     </a>
-                    <a href="#catalogo" class="small-banner-card cat-banner-link" data-cat="assets" title="Explorar Assets 3D / 2D (Pago vía PayPal @albertoeizzi.com)">
+                    <a href="#sector-assets-destacado" class="small-banner-card cat-banner-link" data-cat="assets" title="Explorar Assets 3D / 2D ($4 USD)">
                         <img src="assets/banner-assets.png" alt="Assets 3D / 2D - Pago vía PayPal" loading="lazy">
-                        <span class="small-banner-hover-tag">VER ASSETS ➔</span>
+                        <span class="small-banner-hover-tag">VER ASSET $4 USD ➔</span>
                     </a>
                     <a href="#catalogo" class="small-banner-card cat-banner-link" data-cat="gamesystems" title="Explorar Game Systems (Pago vía PayPal @albertoeizzi.com)">
                         <img src="assets/banner-gamesystems.png" alt="Game Systems - Pago vía PayPal" loading="lazy">
@@ -109,11 +109,14 @@
                         </p>
 
                         <div class="hero-cta">
+                            <a href="#sector-assets-destacado" class="btn btn-accent" style="background: linear-gradient(135deg, #059669, #10b981); color: #fff; border: 1px solid #34d399; font-weight: 800;">
+                                <span>📦 ASSET 3D .GLB ($4 USD)</span>
+                            </a>
                             <a href="#catalogo" class="btn btn-primary">
                                 <span>🚀 EXPLORAR CATÁLOGO</span>
                             </a>
-                            <a href="#arcade-section" class="btn btn-secondary">
-                                <span>🕹️ PROBAR ARCADE EN VIVO</span>
+                            <a href="#hero-arcade-card" class="btn btn-secondary">
+                                <span>🕹️ CONSOLA ARCADE</span>
                             </a>
                             <a href="#work-in-progress" class="btn btn-accent">
                                 <span>🚧 PROYECTOS 2027</span>
@@ -203,6 +206,68 @@
                         <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 18px; background: linear-gradient(to top, rgba(10,11,18,0.95), transparent); display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-size: 12px; font-weight: 700; color: #fff;">Unity 3D / WebGL</span>
                             <span style="font-size: 12px; color: #38bdf8; font-weight: 600;">Windows • Android • Web</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DESTACADO SECTOR ASSETS: PORTAL ÁRBOLES ANCESTRALES 3D (.GLB) -->
+        <section id="sector-assets-destacado" class="spotlight-section" style="padding: 0 0 60px;">
+            <div class="container">
+                <div class="spotlight-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, rgba(16, 185, 129, 0.15) 50%, #041f17 100%), var(--bg-card); border: 2px solid rgba(16, 185, 129, 0.65); border-radius: var(--radius-lg); padding: 36px; backdrop-filter: blur(20px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.8), 0 0 35px rgba(16, 185, 129, 0.35); display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 36px; align-items: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; right: -50px; bottom: -50px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(16,185,129,0.2) 0%, transparent 70%); pointer-events: none;"></div>
+
+                    <!-- MINIATURA DEL ASSET EN VISTA COMPLETA -->
+                    <div style="position: relative; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.85), 0 0 30px rgba(16,185,129,0.4); border: 2px solid rgba(16,185,129,0.55); background: #000;">
+                        <img src="assets/asset-fantasy-trees.jpg" alt="Portal Árboles Ancestrales 3D (.GLB)" style="width: 100%; height: auto; max-height: 380px; object-fit: cover; display: block;" />
+                        <div style="position: absolute; top: 12px; left: 12px; background: rgba(10,11,18,0.92); border: 1px solid #10b981; color: #10b981; font-weight: 800; font-size: 11px; padding: 5px 12px; border-radius: var(--radius-full); letter-spacing: 0.5px;">
+                            📦 ASSET 3D • FORMATO .GLB
+                        </div>
+                        <div style="position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, #059669, #10b981); color: #fff; font-weight: 900; font-size: 13px; padding: 6px 14px; border-radius: var(--radius-full); box-shadow: 0 4px 15px rgba(0,0,0,0.6);">
+                            TOTAL: $4 USD
+                        </div>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 18px; background: linear-gradient(to top, rgba(4,31,23,0.95), transparent); display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 13px; font-weight: 800; color: #facc15;">💳 PayPal: @albertoeizzi.com</span>
+                            <span style="font-size: 12px; color: #a7f3d0; font-weight: 600;">Blender • Unity • Unreal</span>
+                        </div>
+                    </div>
+
+                    <!-- INFORMACIÓN Y BOTONES DE COMPRA Y VISTA 3D -->
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
+                            <span style="background: linear-gradient(135deg, #059669, #10b981); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: var(--radius-full); letter-spacing: 1px; text-transform: uppercase;">
+                                📦 SECTOR ASSETS • NOVEDAD
+                            </span>
+                            <span style="color: #34d399; font-size: 13px; font-weight: 700;">★ 5.0 (Recurso 3D Verificado)</span>
+                        </div>
+                        <h2 style="font-family: var(--font-heading); font-size: 38px; font-weight: 900; line-height: 1.1; margin-bottom: 10px; letter-spacing: 1px; color: #fff;">
+                            PORTAL ÁRBOLES ANCESTRALES 3D (.GLB)
+                        </h2>
+                        <h3 style="font-size: 17px; color: #34d399; font-weight: 700; margin-bottom: 14px;">
+                            Asset 3D de Naturaleza Fantasía con Lianas, Musgo y Sendero Natural • Formato GLB
+                        </h3>
+                        <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px; max-width: 580px;">
+                            Modelo 3D de alta calidad optimizado en formato binario universal <strong>.GLB (glTF 2.0)</strong>. Incluye doble árbol ancestral entrelazado, follaje estilizado, enredaderas colgantes y sendero de tierra. Compatible de forma nativa con Blender, Unity, Unreal Engine, Godot, Roblox y visores web.
+                        </p>
+                        
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;">
+                            <span class="wip-feat-tag" style="border-color: rgba(16,185,129,0.4); color: #a7f3d0;">🌳 Doble Árbol Fantasía</span>
+                            <span class="wip-feat-tag" style="border-color: rgba(16,185,129,0.4); color: #a7f3d0;">📦 Formato Binario .GLB</span>
+                            <span class="wip-feat-tag" style="border-color: rgba(16,185,129,0.4); color: #a7f3d0;">🎨 Texturas PBR Integradas</span>
+                            <span class="wip-feat-tag" style="border-color: rgba(16,185,129,0.4); color: #a7f3d0;">⚡ Listo para Motores</span>
+                        </div>
+
+                        <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
+                            <button class="btn btn-accent btn-buy-paypal" data-id="asset-arboles-ancestrales-glb" style="background: linear-gradient(135deg, #0070ba, #003087); padding: 14px 28px; font-size: 16px; box-shadow: 0 4px 20px rgba(0,112,186,0.6);">
+                                <span>💳 COMPRAR AHORA ($4.00 USD)</span>
+                            </button>
+                            <button class="btn btn-secondary btn-download-game" data-id="asset-arboles-ancestrales-glb" style="border-color: #10b981; color: #34d399; padding: 14px 24px; font-size: 15px;">
+                                <span>👁️ VER 3D / ROTAR MODELO</span>
+                            </button>
+                            <a href="https://www.paypal.me/albertoeizzi/4" target="_blank" class="btn btn-outline" style="border-color: rgba(255,255,255,0.2); color: #94a3b8; font-size: 13px; padding: 12px 18px;">
+                                <span>PayPal: @albertoeizzi.com</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -509,10 +574,10 @@
         Notificación
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="js/sound-fx.js"></script>
-    <script src="js/games-data.js"></script>
-    <script src="js/arcade-engine.js"></script>
-    <script src="js/app.js"></script>
+    <!-- SCRIPTS CON CONTROL DE CACHÉ ACTUALIZADO -->
+    <script src="js/sound-fx.js?v=20261009_showcase"></script>
+    <script src="js/games-data.js?v=20261009_showcase"></script>
+    <script src="js/arcade-engine.js?v=20261009_showcase"></script>
+    <script src="js/app.js?v=20261009_showcase"></script>
 </body>
 </html>
