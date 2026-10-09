@@ -50,9 +50,6 @@
                 <button id="sound-toggle-btn" class="btn-icon" title="Activar/Silenciar Sonido" aria-label="Toggle Sound">
                     🔊
                 </button>
-                <button id="nav-lock-studio-btn" class="btn-icon" title="Bloquear Acceso Privado" aria-label="Bloquear Acceso">
-                    🔒
-                </button>
                 <a href="#catalogo" class="btn btn-primary">
                     <span>JUGAR AHORA</span>
                 </a>
@@ -515,30 +512,10 @@
         Notificación
     </div>
 
-    <!-- MODAL DE SEGURIDAD Y BLOQUEO PRIVADO -->
-    <div id="security-gate" class="security-gate-overlay" style="display: none;">
-        <div class="security-gate-card">
-            <div class="security-shield-icon">🔒</div>
-            <h2>PANEL PRIVADO</h2>
-            <div class="security-tag">ARQUIVISUAL GAMES STUDIOS</div>
-            <p>Acceso restringido para el creador y personal autorizado. Ingresa tu clave para desbloquear el panel:</p>
-            <div class="security-input-group">
-                <input type="password" id="gate-pass-input" placeholder="Ingresa clave (ej: 652025)..." autocomplete="off">
-                <button id="gate-unlock-btn" class="btn btn-primary">ENTRAR</button>
-            </div>
-            <div id="gate-error-msg" class="gate-error"></div>
-            <div class="gate-hint">
-                <span>Claves: <code>652025</code> o <code>ARQUI2026</code></span>
-                <button id="gate-change-pin-btn" style="background: none; border: none; color: var(--neon-cyan); cursor: pointer; text-decoration: underline; font-size: 11px;">Cambiar Clave</button>
-            </div>
-        </div>
-    </div>
-
     <!-- SCRIPTS -->
     <script src="js/sound-fx.js"></script>
     <script src="js/games-data.js"></script>
     <script src="js/arcade-engine.js"></script>
-    <script src="js/security-gate.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
