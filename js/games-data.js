@@ -133,6 +133,37 @@ const ARQUIVISUAL_GAMES = [
         ],
         tags: ["Arquitectura 3D", "Inmersivo", "WebGL", "Exploración"]
     },
+    {
+        id: "hop-hop-islands-wip",
+        title: "HOP HOP ISLANDS: EXPEDICIÓN VOLCÁNICA",
+        subtitle: "Expansión en Producción - Nuevos Mundos & Retos",
+        category: "videogames",
+        categoryName: "Videojuegos",
+        engine: "Unity & WebGL 3D",
+        isBuiltin: false,
+        isWip: true,
+        wipPercent: 70,
+        badge: "🚧 WORK IN PROGRESS",
+        version: "Alpha v0.5",
+        rating: 5.0,
+        playsCount: "En producción",
+        downloadsCount: "70% Listo",
+        gradient: "linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)",
+        coverImg: "https://img.itch.zone/aW1nLzMwNjY3MTM5LnBuZw==/original/VR15Tv.png",
+        shortDesc: "Expansión directa con nuevos biomas volcánicos, plataformas con gravedad variable, física de lava ascendente y modo contrarreloj.",
+        description: "Proyecto en pleno desarrollo activo por Arquivisual Games Studios. Próximamente disponible para jugar en navegador y descargar para PC y móviles.",
+        features: [
+            "Físicas de lava ascendente y plataformas de calor dinámico",
+            "Modelado 3D de alta precisión realizado en Blender",
+            "Nuevas skins exclusivas y estelas mágicas de partículas",
+            "Optimizaciones WebGL para máxima fluidez a 60 FPS"
+        ],
+        controls: {
+            pc: "En desarrollo (Compatible con teclado y gamepad)",
+            mobile: "En desarrollo (Controles táctiles optimizados)"
+        },
+        tags: ["Work In Progress", "3D", "Arcade", "Unity", "Blender", "Próximamente"]
+    },
 
     // -------------------------------------------------------------
     // 2. MINI GAMES (Mini Videojuegos para jugar online y descargar)

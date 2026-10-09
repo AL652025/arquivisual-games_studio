@@ -145,7 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
 
                     <div class="game-actions">
-                        ${item.isPaid ? `
+                        ${item.isWip ? `
+                            <button class="btn btn-secondary btn-wip-item-card" data-id="${item.id}" style="border-color: #f59e0b; color: #f59e0b; grid-column: 1 / -1; width: 100%;">
+                                <span>🚧 EN DESARROLLO (${item.wipPercent || 70}%)</span>
+                            </button>
+                        ` : (item.isPaid ? `
                             <button class="btn btn-accent btn-buy-paypal" data-id="${item.id}" style="background: linear-gradient(135deg, #0070ba, #003087); color: #fff;">
                                 <span>💳 COMPRAR (${item.price})</span>
                             </button>
@@ -159,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button class="btn btn-secondary btn-download-game" data-id="${item.id}">
                                 <span>${downloadLabel}</span>
                             </button>
-                        `}
+                        `)}
                     </div>
                 </div>
             </article>
@@ -195,6 +199,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.soundFX) window.soundFX.click();
                 const id = e.currentTarget.getAttribute('data-id');
                 openPayPalCheckout(id);
+            });
+        });
+
+        document.querySelectorAll('.btn-wip-item-card').forEach(btn => {
+            btn.addEventListener('mouseenter', () => window.soundFX && window.soundFX.hover());
+            btn.addEventListener('click', (e) => {
+                if (window.soundFX) window.soundFX.click();
+                const wipSection = document.getElementById('work-in-progress');
+                if (wipSection) {
+                    wipSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                showToast('🚧 Proyecto en desarrollo activo. Mira los detalles aquí abajo.');
             });
         });
     }
@@ -487,6 +503,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3500);
     }
     window.showToast = showToast;
+
+    // 8. Evento Botón Notificación Work In Progress
+    const btnWipNotify = document.getElementById('btn-wip-notify');
+    if (btnWipNotify) {
+        btnWipNotify.addEventListener('click', () => {
+            if (window.soundFX) window.soundFX.collect();
+            btnWipNotify.innerHTML = '<span>✅ ¡Registrado! Te notificaremos</span>';
+            btnWipNotify.style.borderColor = '#10b981';
+            btnWipNotify.style.color = '#10b981';
+            showToast('🚧 ¡Suscripción confirmada! Te avisaremos el día del lanzamiento.');
+        });
+    }
 
     // Primer renderizado
     renderGames();
