@@ -1367,9 +1367,10 @@ body {
 
 .wip-showcase-grid {
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
     align-items: stretch;
+    margin-bottom: 28px;
 }
 
 .wip-card-featured {
@@ -1620,6 +1621,13 @@ body {
     gap: 16px;
 }
 
+.wip-secondary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 10px;
+}
+
 .wip-mini-card {
     background: rgba(13, 17, 29, 0.85);
     border: 1px solid rgba(245, 158, 11, 0.25);
@@ -1704,6 +1712,9 @@ body {
 
 @media (max-width: 968px) {
     .wip-showcase-grid {
+        grid-template-columns: 1fr;
+    }
+    .wip-secondary-grid {
         grid-template-columns: 1fr;
     }
 }

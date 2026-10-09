@@ -504,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.showToast = showToast;
 
-    // 8. Evento Botón Notificación Work In Progress
+    // 8. Evento Botones Notificación Work In Progress & Proyectos 2027
     const btnWipNotify = document.getElementById('btn-wip-notify');
     if (btnWipNotify) {
         btnWipNotify.addEventListener('click', () => {
@@ -512,7 +512,18 @@ document.addEventListener('DOMContentLoaded', () => {
             btnWipNotify.innerHTML = '<span>✅ ¡Registrado! Te notificaremos</span>';
             btnWipNotify.style.borderColor = '#10b981';
             btnWipNotify.style.color = '#10b981';
-            showToast('🚧 ¡Suscripción confirmada! Te avisaremos el día del lanzamiento.');
+            showToast('🐸 ¡Suscripción para Charlie confirmada! Te avisaremos el día del lanzamiento.');
+        });
+    }
+
+    const btnWipNotify2027 = document.getElementById('btn-wip-notify-2027');
+    if (btnWipNotify2027) {
+        btnWipNotify2027.addEventListener('click', () => {
+            if (window.soundFX) window.soundFX.collect();
+            btnWipNotify2027.innerHTML = '<span>✅ ¡Anotado para 2027!</span>';
+            btnWipNotify2027.style.borderColor = '#eab308';
+            btnWipNotify2027.style.color = '#fef08a';
+            showToast('🏛️ ¡Anotado para Maya Empires (Roblox & Unity 2027)!');
         });
     }
 

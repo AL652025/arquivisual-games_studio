@@ -165,6 +165,38 @@ const ARQUIVISUAL_GAMES = [
         itchUrl: "https://arquivisualgames.itch.io",
         tags: ["Work In Progress", "3D", "Plataformas", "Aventura", "Itch.io", "Early Beta"]
     },
+    {
+        id: "maya-empires-2027",
+        title: "MAYA EMPIRES: LOST IN THE CITY",
+        subtitle: "Aventura Arqueológica Multijugador - Proyecto 2027",
+        category: "videogames",
+        categoryName: "Videojuegos",
+        engine: "Roblox & Made with Unity 2027",
+        isBuiltin: false,
+        isWip: true,
+        wipPercent: 35,
+        badge: "🏛️ PROYECTO 2027",
+        version: "Pre-Producción 2027",
+        rating: 5.0,
+        playsCount: "Roblox & Unity",
+        downloadsCount: "Año 2027",
+        gradient: "linear-gradient(135deg, #ca8a04 0%, #a16207 50%, #451a03 100%)",
+        coverImg: "assets/maya-empires-2027.png",
+        shortDesc: "Colisión dimensional entre templos mayas ancestrales y una metrópolis futurista. Aventura cooperativa en Roblox y Unity 2027 producida por Arquivisual Games.",
+        description: "El proyecto de gran escala de Arquivisual Games para 2027. Maya Empires: Lost In The City sitúa a los jugadores en un mundo misterioso donde pirámides milenarias emergen entre rascacielos. Explora en cooperativo, sortea trampas, descifra mapas antiguos y descubre los cristales sagrados.",
+        features: [
+            "Multiplataforma: Desarrollado para Roblox y Made with Unity 2027",
+            "Exploración cooperativa online en templos mayas y ciudades futuristas",
+            "Mecánicas de acertijos antiguos, mapas del tesoro y reliquias doradas",
+            "Producción insignia con gráficos estilizados y banda sonora orquestal"
+        ],
+        controls: {
+            pc: "En desarrollo (Compatible con PC, Móviles y Consolas)",
+            mobile: "En desarrollo (Controles táctiles y cross-play)"
+        },
+        itchUrl: "https://arquivisualgames.itch.io",
+        tags: ["Proyecto 2027", "Roblox", "Unity 2027", "3D", "Aventura", "Multijugador", "Cooperativo"]
+    },
 
     // -------------------------------------------------------------
     // 2. MINI GAMES (Mini Videojuegos para jugar online y descargar)
