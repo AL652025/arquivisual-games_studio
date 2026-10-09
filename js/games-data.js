@@ -29,7 +29,7 @@ const ARQUIVISUAL_CATEGORIES = {
         badge: "⚡ JUGAR AL INSTANTE",
         gradient: "linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #311042 100%)",
         icon: "🕹️",
-        bannerImg: "", // Se mostrará el banner estilizado neón hasta que cargues una imagen
+        bannerImg: "assets/banner-minigames.png",
         description: "Partidas rápidas, arcades a 60 FPS con físicas dinámicas y controles accesibles. Cualquiera puede jugarlos online sin instalar nada o descargarlos portables."
     },
     assets: {
@@ -40,7 +40,7 @@ const ARQUIVISUAL_CATEGORIES = {
         badge: "📦 RECURSOS DE DESARROLLO",
         gradient: "linear-gradient(135deg, #059669 0%, #10b981 50%, #064e3b 100%)",
         icon: "📦",
-        bannerImg: "",
+        bannerImg: "assets/banner-assets.png",
         description: "Paquetes de recursos optimizados para creadores en Blender, GDevelop, Unity y Godot. Descarga directa en formatos estándar (.blend, .fbx, .png)."
     },
     gamesystems: {
@@ -51,7 +51,7 @@ const ARQUIVISUAL_CATEGORIES = {
         badge: "⚙️ PLANTILLAS & LÓGICA",
         gradient: "linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #451a03 100%)",
         icon: "⚙️",
-        bannerImg: "",
+        bannerImg: "assets/banner-gamesystems.png",
         description: "Sistemas modulares, controladores de personajes, kits de físicas e inteligencias artificiales para acelerar el desarrollo de tus propios juegos."
     }
 };
