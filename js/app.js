@@ -145,12 +145,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
 
                     <div class="game-actions">
-                        <button class="btn btn-primary btn-play-game" data-id="${item.id}">
-                            <span>${playLabel}</span>
-                        </button>
-                        <button class="btn btn-secondary btn-download-game" data-id="${item.id}">
-                            <span>${downloadLabel}</span>
-                        </button>
+                        ${item.isPaid ? `
+                            <button class="btn btn-accent btn-buy-paypal" data-id="${item.id}" style="background: linear-gradient(135deg, #0070ba, #003087); color: #fff;">
+                                <span>💳 COMPRAR (${item.price})</span>
+                            </button>
+                            <button class="btn btn-secondary btn-download-game" data-id="${item.id}">
+                                <span>ℹ️ DETALLES</span>
+                            </button>
+                        ` : `
+                            <button class="btn btn-primary btn-play-game" data-id="${item.id}">
+                                <span>${playLabel}</span>
+                            </button>
+                            <button class="btn btn-secondary btn-download-game" data-id="${item.id}">
+                                <span>${downloadLabel}</span>
+                            </button>
+                        `}
                     </div>
                 </div>
             </article>
@@ -179,6 +188,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 openDownloadModal(id);
             });
         });
+
+        document.querySelectorAll('.btn-buy-paypal').forEach(btn => {
+            btn.addEventListener('mouseenter', () => window.soundFX && window.soundFX.hover());
+            btn.addEventListener('click', (e) => {
+                if (window.soundFX) window.soundFX.click();
+                const id = e.currentTarget.getAttribute('data-id');
+                openPayPalCheckout(id);
+            });
+        });
+    }
+
+    function openPayPalCheckout(itemId) {
+        const item = window.ARQUIVISUAL_GAMES.find(g => g.id === itemId);
+        if (!item) return;
+
+        if (window.soundFX) window.soundFX.collect();
+
+        modalTitle.textContent = `Checkout Seguro: ${item.title}`;
+        modalControlsDesc.textContent = `Método de pago: PayPal (@albertoeizzi.com) | Licencia comercial incluida.`;
+        modalFeaturesList.innerHTML = `
+            <li>Producto: <strong>${item.title}</strong></li>
+            <li>Categoría: <strong>${item.categoryName}</strong></li>
+            <li>Precio: <strong style="color: #f59e0b; font-size: 16px;">${item.price}</strong></li>
+            <li>Cuenta de destino PayPal: <strong>albertoeizzi.com</strong></li>
+            <li>Licencia comercial completa para utilizar en videojuegos y proyectos</li>
+            <li>Entrega de archivos y soporte directo del estudio</li>
+        `;
+
+        modalViewport.innerHTML = `
+            <div style="padding: 35px 20px; text-align: center; background: #080b14;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 112, 186, 0.15); border: 2px solid #0070ba; font-size: 34px; margin-bottom: 14px;">
+                    💳
+                </div>
+                <h3 style="font-size: 24px; color: #fff; margin-bottom: 4px;">Comprar ${item.title}</h3>
+                <div style="font-size: 26px; font-weight: 900; color: #f59e0b; margin-bottom: 12px;">${item.price}</div>
+                <p style="color: #94a3b8; max-width: 500px; margin: 0 auto 20px; font-size: 14px;">
+                    Haz clic en el botón inferior para completar tu pago de forma segura a través de <strong>PayPal</strong> a la cuenta oficial <strong>@albertoeizzi.com</strong>.
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto;">
+                    <a href="https://www.paypal.com/paypalme/albertoeizzi" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #0070ba, #003087); padding: 14px 24px; font-size: 16px; justify-content: center; box-shadow: 0 4px 20px rgba(0,112,186,0.5);">
+                        <span>💳 PAGAR CON PAYPAL (@albertoeizzi.com)</span>
+                    </a>
+                    <a href="${item.itchUrl}" target="_blank" class="btn btn-secondary" style="font-size: 13px; justify-content: center;">
+                        <span>🌐 Ver en Itch.io</span>
+                    </a>
+                </div>
+                <div style="margin-top: 18px; font-size: 12px; color: #64748b;">
+                    🔒 Conexión cifrada SSL • Cuenta verificada PayPal: <code>albertoeizzi.com</code>
+                </div>
+            </div>
+        `;
+
+        gameModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
 
     // Filtros por pestaña
@@ -193,8 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Enlaces de categoría en la barra de navegación superior
-    document.querySelectorAll('.nav-cat-link').forEach(link => {
+    // Enlaces de categoría en la barra de navegación superior y en los 4 Banners chicos
+    document.querySelectorAll('.nav-cat-link, .cat-banner-link').forEach(link => {
         link.addEventListener('click', (e) => {
             const cat = link.getAttribute('data-cat');
             if (cat) {
@@ -205,6 +268,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     else b.classList.remove('active');
                 });
                 renderGames();
+
+                // Desplazamiento suave al catálogo si se hace clic desde los banners
+                const catalogSec = document.getElementById('catalogo');
+                if (catalogSec && link.classList.contains('cat-banner-link')) {
+                    catalogSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         });
     });

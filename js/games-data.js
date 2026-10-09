@@ -18,7 +18,7 @@ const ARQUIVISUAL_CATEGORIES = {
         gradient: "linear-gradient(135deg, #0284c7 0%, #3b82f6 50%, #1e1b4b 100%)",
         icon: "🎮",
         // Aquí puedes poner la ruta de tu banner personalizado (ej: 'assets/banner-videogames.png')
-        bannerImg: "assets/banner-arquivisual.png",
+        bannerImg: "assets/banner-videogames.png",
         description: "Videojuegos de producción completa desarrollados por Arquivisual Games Studios. Disponibles para jugar en el navegador y con descargas para Windows y móviles."
     },
     minigames: {
@@ -242,7 +242,7 @@ const ARQUIVISUAL_GAMES = [
     },
 
     // -------------------------------------------------------------
-    // 3. ASSETS (Recursos 3D, Texturas, UI, Sprites)
+    // 3. ASSETS (Recursos 3D, Texturas, UI, Sprites - PAGOS VÍA PAYPAL)
     // -------------------------------------------------------------
     {
         id: "asset-sci-fi-props",
@@ -252,7 +252,10 @@ const ARQUIVISUAL_GAMES = [
         categoryName: "Assets",
         engine: "Blender 3D (.BLEND / .FBX)",
         isBuiltin: false,
-        badge: "📦 PACK 3D ASSETS",
+        isPaid: true,
+        price: "$9.99 USD",
+        paypalAccount: "albertoeizzi.com",
+        badge: "💳 $9.99 USD (PAYPAL)",
         version: "v1.0",
         rating: 4.9,
         playsCount: "3.2K",
@@ -264,7 +267,7 @@ const ARQUIVISUAL_GAMES = [
             "25+ Modelos 3D Low-Poly y Mid-Poly optimizados",
             "Formatos incluidos: .BLEND nativo, .FBX y .OBJ",
             "Texturas PBR 2K (Albedo, Normal, Roughness, Emission)",
-            "Licencia libre para tus proyectos comerciales e independientes"
+            "Licencia comercial completa incluida con tu compra vía PayPal"
         ],
         controls: {
             pc: "Importa los archivos .FBX o .BLEND a tu software 3D favorito",
@@ -272,12 +275,12 @@ const ARQUIVISUAL_GAMES = [
         },
         playMode: "external",
         playUrl: "https://arquivisualgames.itch.io",
-        downloadUrl: "https://arquivisualgames.itch.io",
+        downloadUrl: "https://www.paypal.me/albertoeizzi",
         itchUrl: "https://arquivisualgames.itch.io",
         downloads: [
-            { name: "Descargar Pack (.ZIP)", file: "Arquivisual_SciFi_Props.zip", size: "65 MB", url: "https://arquivisualgames.itch.io" }
+            { name: "Comprar Pack (.ZIP)", file: "Arquivisual_SciFi_Props.zip", size: "65 MB", url: "https://www.paypal.me/albertoeizzi" }
         ],
-        tags: ["Assets", "3D Models", "Blender", "FBX", "PBR", "Sci-Fi"]
+        tags: ["Assets", "Pago PayPal", "3D Models", "Blender", "FBX", "PBR", "Sci-Fi"]
     },
     {
         id: "asset-cyber-ui-kit",
@@ -287,7 +290,10 @@ const ARQUIVISUAL_GAMES = [
         categoryName: "Assets",
         engine: "PNG / SVG Vectorial",
         isBuiltin: false,
-        badge: "🎨 UI & HUD ASSETS",
+        isPaid: true,
+        price: "$4.99 USD",
+        paypalAccount: "albertoeizzi.com",
+        badge: "💳 $4.99 USD (PAYPAL)",
         version: "v1.2",
         rating: 5.0,
         playsCount: "5.1K",
@@ -298,7 +304,8 @@ const ARQUIVISUAL_GAMES = [
         features: [
             "Más de 80 elementos de interfaz listos para arrastrar",
             "Formatos PNG con canal transparente y SVG escalable",
-            "Estados interactivos: Normal, Hover y Clic incluidos"
+            "Estados interactivos: Normal, Hover y Clic incluidos",
+            "Licencia comercial para uso en juegos y apps"
         ],
         controls: {
             pc: "Arrastra los archivos PNG o SVG directamente a tu motor de juegos",
@@ -306,16 +313,16 @@ const ARQUIVISUAL_GAMES = [
         },
         playMode: "external",
         playUrl: "https://arquivisualgames.itch.io",
-        downloadUrl: "https://arquivisualgames.itch.io",
+        downloadUrl: "https://www.paypal.me/albertoeizzi",
         itchUrl: "https://arquivisualgames.itch.io",
         downloads: [
-            { name: "Descargar UI Kit (.ZIP)", file: "Cyber_UI_Kit.zip", size: "18 MB", url: "https://arquivisualgames.itch.io" }
+            { name: "Comprar UI Kit (.ZIP)", file: "Cyber_UI_Kit.zip", size: "18 MB", url: "https://www.paypal.me/albertoeizzi" }
         ],
-        tags: ["Assets", "UI Kit", "HUD", "Cyberpunk", "PNG", "SVG"]
+        tags: ["Assets", "Pago PayPal", "UI Kit", "HUD", "Cyberpunk", "PNG", "SVG"]
     },
 
     // -------------------------------------------------------------
-    // 4. GAME SYSTEMS (Mecánicas, Plantillas y Lógica de Juego)
+    // 4. GAME SYSTEMS (Mecánicas, Plantillas y Lógica - PAGOS VÍA PAYPAL)
     // -------------------------------------------------------------
     {
         id: "system-platformer-controller",
@@ -325,7 +332,10 @@ const ARQUIVISUAL_GAMES = [
         categoryName: "Game Systems",
         engine: "GDevelop 5 Template",
         isBuiltin: false,
-        badge: "⚙️ PLANTILLA MECÁNICAS",
+        isPaid: true,
+        price: "$14.99 USD",
+        paypalAccount: "albertoeizzi.com",
+        badge: "💳 $14.99 USD (PAYPAL)",
         version: "v2.0",
         rating: 4.9,
         playsCount: "4.7K",
@@ -345,12 +355,12 @@ const ARQUIVISUAL_GAMES = [
         },
         playMode: "external",
         playUrl: "https://arquivisualgames.itch.io",
-        downloadUrl: "https://arquivisualgames.itch.io",
+        downloadUrl: "https://www.paypal.me/albertoeizzi",
         itchUrl: "https://arquivisualgames.itch.io",
         downloads: [
-            { name: "Descargar Plantilla GDevelop (.ZIP)", file: "GDevelop_Platformer_System.zip", size: "6 MB", url: "https://arquivisualgames.itch.io" }
+            { name: "Comprar Plantilla GDevelop (.ZIP)", file: "GDevelop_Platformer_System.zip", size: "6 MB", url: "https://www.paypal.me/albertoeizzi" }
         ],
-        tags: ["Game Systems", "GDevelop", "Mecánicas", "Físicas", "Plantilla"]
+        tags: ["Game Systems", "Pago PayPal", "GDevelop", "Mecánicas", "Físicas", "Plantilla"]
     },
     {
         id: "system-procedural-runner",
@@ -360,7 +370,10 @@ const ARQUIVISUAL_GAMES = [
         categoryName: "Game Systems",
         engine: "JavaScript / HTML5 / GDevelop",
         isBuiltin: false,
-        badge: "⚙️ SISTEMA DE LÓGICA",
+        isPaid: true,
+        price: "$12.99 USD",
+        paypalAccount: "albertoeizzi.com",
+        badge: "💳 $12.99 USD (PAYPAL)",
         version: "v1.1",
         rating: 4.8,
         playsCount: "3.9K",
@@ -379,12 +392,12 @@ const ARQUIVISUAL_GAMES = [
         },
         playMode: "external",
         playUrl: "https://arquivisualgames.itch.io",
-        downloadUrl: "https://arquivisualgames.itch.io",
+        downloadUrl: "https://www.paypal.me/albertoeizzi",
         itchUrl: "https://arquivisualgames.itch.io",
         downloads: [
-            { name: "Descargar Script y Proyecto (.ZIP)", file: "Procedural_Runner_Engine.zip", size: "4 MB", url: "https://arquivisualgames.itch.io" }
+            { name: "Comprar Script y Proyecto (.ZIP)", file: "Procedural_Runner_Engine.zip", size: "4 MB", url: "https://www.paypal.me/albertoeizzi" }
         ],
-        tags: ["Game Systems", "Procedural", "Lógica", "Arcade", "Runner"]
+        tags: ["Game Systems", "Pago PayPal", "Procedural", "Lógica", "Arcade", "Runner"]
     }
 ];
 
