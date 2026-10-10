@@ -69,13 +69,15 @@ const ARQUIVISUAL_GAMES = [
         categoryName: "Assets",
         engine: "Modelo 3D (.GLB / glTF)",
         modelUrl: "assets/models/arboles-ancestrales.glb",
+        pageUrl: "assets.html",
         isBuiltin: false,
         isPaid: true,
         price: "$4.00 USD",
         paypalAmount: "4",
         paypalAccount: "albertoeizzi.com",
         paypalUrl: "https://www.paypal.me/albertoeizzi/4",
-        badge: "💳 $4.00 USD (PAYPAL)",
+        mercadoPagoUrl: "https://link.mercadopago.com.ar/albertoeizzi",
+        badge: "💳 $4.00 USD | PAYPAL & MERCADO PAGO",
         version: "v1.0 (GLB)",
         rating: 5.0,
         playsCount: "Nuevo",
@@ -91,34 +93,39 @@ const ARQUIVISUAL_GAMES = [
             "Texturas PBR integradas (Albedo, Rugosidad, Normales y AO)",
             "Optimizado para videojuegos, mundos virtuales y renders",
             "Licencia comercial de por vida incluida con tu compra",
-            "Pago seguro y directo vía PayPal: $4.00 USD (@albertoeizzi.com)"
+            "Pago vía PayPal ($4.00 USD) o Mercado Pago (Latinoamérica) + Google Pay próximamente"
         ],
         controls: {
             pc: "Importa el archivo .GLB con 'File > Import > glTF 2.0 (.glb/.gltf)' en Blender, Unity o Unreal",
             mobile: "Visualizable en cualquier navegador móvil compatible con WebGL / Model-Viewer"
         },
         playMode: "external",
-        playUrl: "https://www.paypal.me/albertoeizzi/4",
-        downloadUrl: "https://www.paypal.me/albertoeizzi/4",
+        playUrl: "assets.html",
+        downloadUrl: "assets.html",
         itchUrl: "https://arquivisualgames.itch.io",
         downloads: [
-            { name: "Comprar Modelo 3D .GLB ($4 USD)", file: "Arboles_Ancestrales_3D.glb", size: "Formato .GLB", url: "https://www.paypal.me/albertoeizzi/4" }
+            { name: "Comprar Modelo 3D .GLB ($4 USD - PayPal)", file: "Arboles_Ancestrales_3D.glb", size: "Formato .GLB", url: "https://www.paypal.me/albertoeizzi/4" },
+            { name: "Pagar con Mercado Pago (Latinoamérica)", file: "Arboles_Ancestrales_3D.glb", size: "LATAM", url: "https://link.mercadopago.com.ar/albertoeizzi" }
         ],
-        tags: ["Assets", "GLB", "Modelos 3D", "$4 USD", "PayPal", "Naturaleza", "Fantasía", "Blender", "Unity"]
+        tags: ["Assets", "GLB", "Modelos 3D", "$4 USD", "PayPal", "Mercado Pago", "Google Pay (Pronto)", "Blender", "Unity"]
     },
 
     // -------------------------------------------------------------
-    // 1. VIDEOGAMES (Videojuegos Completos)
+    // 1. MINI GAMES & VIDEOGAMES DESTACADOS
     // -------------------------------------------------------------
     {
         id: "hop-hop-islands",
         title: "HOP HOP ISLANDS",
-        subtitle: "Aventura 3D Arcade - Reconstruye el Gran Arcoíris",
-        category: "videogames",
-        categoryName: "Videojuegos",
+        subtitle: "Can you help Pip jump this far? 🌈 - Mini Videojuego 3D Arcade",
+        category: "minigames",
+        secondaryCategory: "videogames",
+        categoryName: "Mini Videojuegos",
         engine: "Itch.io (Unity / HTML5)",
+        pageUrl: "minigames.html",
+        youtubeUrl: "https://youtube.com/shorts/Vd28aatsYv4?si=YEs5pYRl2mwZ4H6w",
+        youtubeEmbed: "https://www.youtube.com/embed/Vd28aatsYv4",
         isBuiltin: false,
-        badge: "⭐ ESTRELLA OFICIAL",
+        badge: "🕹️ MINI JUEGO ESTRELLA",
         version: "v1.1.0",
         rating: 5.0,
         playsCount: "25.8K",
@@ -126,13 +133,13 @@ const ARQUIVISUAL_GAMES = [
         gradient: "linear-gradient(135deg, #0284c7 0%, #f43f5e 100%)",
         coverImg: "https://img.itch.zone/aW1nLzMwNjY2NjA0LnBuZw==/508x254%23mb/BT%2B9r7.png",
         bannerImg: "https://img.itch.zone/aW1nLzMwNjY3MTM5LnBuZw==/original/VR15Tv.png",
-        shortDesc: "El Gran Arcoíris se ha roto. Ayuda a Pip a saltar de isla en isla flotante, recoger gemas y salvar el mundo.",
-        description: "Juego oficial insigne de Arquivisual Games Studios. Con físicas de salto por carga ('hold and release'), combos con dianas perfectas, 4 mundos temáticos y skins desbloqueables.",
+        shortDesc: "El Gran Arcoíris se ha roto. Ayuda a Pip a saltar de isla en isla flotante, mira el YouTube Short oficial, juega en Itch.io y descárgalo para PC o Android.",
+        description: "Mini videojuego oficial insigne de Arquivisual Games Studios promocionado en YouTube Shorts e Itch.io. Con físicas de salto por carga ('hold and release'), combos con dianas perfectas, 4 mundos temáticos y skins desbloqueables.",
         features: [
-            "Jugabilidad adictiva 'One-Touch' accesible para todos",
-            "4 niveles con metas de puntuación y dificultad creciente",
-            "Islas móviles, flotantes y plataformas con físicas dinámicas",
-            "Disponible para jugar en navegador o descargar a PC y Android"
+            "Video oficial en YouTube Shorts: Can you help Pip jump this far? 🌈",
+            "Jugabilidad adictiva 'One-Touch' en navegador o en Itch.io",
+            "4 niveles con metas de puntuación e islas flotantes dinámicas",
+            "Descarga directa para Windows 64-bit (.ZIP) y Android (.APK)"
         ],
         controls: {
             pc: "Mantén ESPACIO / W / Clic Izquierdo y suelta para saltar | M: Silenciar",
@@ -146,7 +153,7 @@ const ARQUIVISUAL_GAMES = [
             { name: "Windows 64-bit (.ZIP)", file: "HopHopIslands_Windows.zip", size: "30 MB", url: "https://arquivisualgames.itch.io/hop-hop-islands/purchase" },
             { name: "Android APK (7.1+)", file: "HopHopIslands_Android.apk", size: "21 MB", url: "https://arquivisualgames.itch.io/hop-hop-islands/purchase" }
         ],
-        tags: ["Itch.io", "3D", "Arcade", "Casual", "Unity", "Windows", "Android"]
+        tags: ["Mini Videojuegos", "Itch.io", "YouTube Short", "3D", "Arcade", "Windows", "Android"]
     },
     {
         id: "arch-dimension-3d",

@@ -38,6 +38,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (categoryBannerContainer && window.ARQUIVISUAL_CATEGORIES) {
             const cat = window.ARQUIVISUAL_CATEGORIES[currentFilter];
             if (cat) {
+                const subpageAction = currentFilter === 'minigames' ? `
+                    <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="minigames.html" class="btn btn-primary" style="background: linear-gradient(135deg, #6366f1, #a855f7); font-size: 13px; padding: 10px 18px;">
+                            <span>🕹️ ABRIR PÁGINA DE MINI VIDEOJUEGOS (HOP HOP ISLANDS + YOUTUBE + ITCH.IO)</span>
+                        </a>
+                        <a href="https://youtube.com/shorts/Vd28aatsYv4?si=YEs5pYRl2mwZ4H6w" target="_blank" class="btn btn-secondary" style="border-color: #ef4444; color: #fca5a5; font-size: 13px; padding: 10px 16px;">
+                            <span>🎬 VER YOUTUBE SHORT</span>
+                        </a>
+                    </div>
+                ` : (currentFilter === 'assets' ? `
+                    <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="assets.html" class="btn btn-primary" style="background: linear-gradient(135deg, #059669, #10b981); font-size: 13px; padding: 10px 18px;">
+                            <span>📦 ABRIR PÁGINA DE ASSETS 3D (.GLB) — PAYPAL & MERCADO PAGO</span>
+                        </a>
+                    </div>
+                ` : '');
+
                 categoryBannerContainer.innerHTML = `
                     <div class="category-banner-card" style="background: ${cat.gradient};">
                         ${cat.bannerImg ? `<img src="${cat.bannerImg}" class="banner-bg-img" alt="${cat.title}" />` : ''}
@@ -45,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="banner-badge">${cat.badge}</span>
                             <h3>${cat.icon} ${cat.title}</h3>
                             <p>${cat.description}</p>
+                            ${subpageAction}
                         </div>
                     </div>
                 `;
@@ -56,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="banner-content">
                             <span class="banner-badge">✦ CATÁLOGO COMPLETO</span>
                             <h3>CATÁLOGO ARQUIVISUAL STUDIOS</h3>
-                            <p>Explora nuestras 4 divisiones: <strong>Videojuegos</strong>, <strong>Mini Videojuegos</strong> para jugar online y descargar, <strong>Assets 3D</strong> y <strong>Game Systems</strong>.</p>
+                            <p>Explora nuestras 4 divisiones: <strong>Videojuegos</strong>, <a href="minigames.html" style="color: #c4b5fd; text-decoration: underline;"><strong>Mini Videojuegos</strong></a> para jugar online y descargar en Itch.io, <a href="assets.html" style="color: #6ee7b7; text-decoration: underline;"><strong>Assets 3D (.GLB)</strong></a> con PayPal y Mercado Pago, y <strong>Game Systems</strong>.</p>
                         </div>
                     </div>
                 `;
@@ -67,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Filtro por las 4 categorías oficiales
             let matchesFilter = true;
             if (currentFilter !== 'all') {
-                matchesFilter = (item.category === currentFilter);
+                matchesFilter = (item.category === currentFilter || item.secondaryCategory === currentFilter);
             }
 
             // Filtro por búsqueda de texto
@@ -150,19 +168,34 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span>🚧 EN DESARROLLO (${item.wipPercent || 70}%)</span>
                             </button>
                         ` : (item.isPaid ? `
+                            ${item.pageUrl ? `
+                                <a href="${item.pageUrl}" class="btn btn-primary" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; grid-column: 1 / -1; justify-content: center;">
+                                    <span>📦 ABRIR PÁGINA DEL ASSET (${item.price} — PAYPAL / MERCADO PAGO)</span>
+                                </a>
+                            ` : ''}
                             <button class="btn btn-accent btn-buy-paypal" data-id="${item.id}" style="background: linear-gradient(135deg, #0070ba, #003087); color: #fff;">
-                                <span>💳 COMPRAR (${item.price})</span>
+                                <span>💳 PAYPAL / MP (${item.price})</span>
                             </button>
                             <button class="btn btn-secondary btn-download-game" data-id="${item.id}">
-                                <span>${item.modelUrl ? '👁️ VER 3D / INFO' : 'ℹ️ DETALLES'}</span>
+                                <span>${item.modelUrl ? '👁️ VISOR 3D' : 'ℹ️ DETALLES'}</span>
                             </button>
                         ` : `
+                            ${item.pageUrl ? `
+                                <a href="${item.pageUrl}" class="btn btn-primary" style="background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; grid-column: 1 / -1; justify-content: center;">
+                                    <span>🕹️ ABRIR PÁGINA MINI JUEGO (ITCH.IO + YOUTUBE + DESCARGA)</span>
+                                </a>
+                            ` : ''}
                             <button class="btn btn-primary btn-play-game" data-id="${item.id}">
                                 <span>${playLabel}</span>
                             </button>
                             <button class="btn btn-secondary btn-download-game" data-id="${item.id}">
                                 <span>${downloadLabel}</span>
                             </button>
+                            ${item.youtubeUrl ? `
+                                <a href="${item.youtubeUrl}" target="_blank" class="btn btn-secondary" style="grid-column: 1 / -1; border-color: #ef4444; color: #fca5a5; justify-content: center;">
+                                    <span>🎬 VER YOUTUBE SHORT OFICIAL</span>
+                                </a>
+                            ` : ''}
                         `)}
                     </div>
                 </div>
@@ -223,31 +256,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const priceNum = item.paypalAmount || (item.price ? item.price.replace(/[^0-9.]/g, '') : '4');
         const paypalDirectUrl = item.paypalUrl || `https://www.paypal.me/albertoeizzi/${priceNum}`;
+        const mercadoPagoUrl = item.mercadoPagoUrl || 'https://link.mercadopago.com.ar/albertoeizzi';
 
         modalTitle.textContent = `Checkout Seguro: ${item.title}`;
-        modalControlsDesc.textContent = `Método de pago: PayPal (@albertoeizzi.com) | Formato: ${item.engine || 'Recurso Digital'}`;
+        modalControlsDesc.textContent = `Métodos de pago: PayPal (Internacional) | Mercado Pago (Latinoamérica) | Google Pay (Próximamente)`;
         modalFeaturesList.innerHTML = `
             <li>Producto: <strong>${item.title}</strong></li>
             <li>Categoría: <strong>${item.categoryName}</strong></li>
             <li>Formato: <strong>${item.engine}</strong></li>
             <li>Precio Total: <strong style="color: #f59e0b; font-size: 16px;">${item.price}</strong></li>
-            <li>Cuenta oficial PayPal: <strong>albertoeizzi.com</strong> (@albertoeizzi.com)</li>
+            <li>Opción 1 (Internacional): <strong>PayPal (@albertoeizzi.com)</strong></li>
+            <li>Opción 2 (Latinoamérica): <strong>Mercado Pago (Tarjetas, Dinero en cuenta, Rapipago / PagoFácil)</strong></li>
+            <li>Opción 3: <strong>Google Pay (Próximamente)</strong></li>
             <li>Licencia comercial completa para utilizar en videojuegos y proyectos</li>
-            <li>Entrega de archivos y soporte directo del estudio</li>
         `;
 
         modalViewport.innerHTML = `
             <div style="padding: 24px 20px; text-align: center; background: #080b14;">
                 ${item.modelUrl ? `
                     <div style="max-width: 500px; margin: 0 auto 16px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 8px 30px rgba(0,0,0,0.7); position: relative;">
-                        <model-viewer src="${item.modelUrl}" poster="${item.coverImg}" alt="${item.title}" auto-rotate camera-controls shadow-intensity="1" style="width: 100%; height: 260px; background: radial-gradient(circle, #092117 0%, #050b14 100%); display: block;"></model-viewer>
+                        <model-viewer src="${item.modelUrl}" poster="${item.coverImg}" alt="${item.title}" auto-rotate camera-controls shadow-intensity="1" style="width: 100%; height: 240px; background: radial-gradient(circle, #092117 0%, #050b14 100%); display: block;"></model-viewer>
                         <div style="position: absolute; bottom: 8px; right: 12px; background: rgba(0,0,0,0.75); padding: 4px 10px; border-radius: 6px; font-size: 11px; color: #10b981; pointer-events: none; border: 1px solid rgba(16,185,129,0.3);">
                             🔄 Arrastra para girar en 3D (.GLB)
                         </div>
                     </div>
                 ` : (item.coverImg ? `
                     <div style="max-width: 440px; margin: 0 auto 16px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 8px 30px rgba(0,0,0,0.7); background: #000;">
-                        <img src="${item.coverImg}" alt="${item.title}" style="width: 100%; height: auto; max-height: 240px; object-fit: contain; display: block;" />
+                        <img src="${item.coverImg}" alt="${item.title}" style="width: 100%; height: auto; max-height: 220px; object-fit: contain; display: block;" />
                     </div>
                 ` : `
                     <div style="display: inline-flex; align-items: center; justify-content: center; width: 68px; height: 68px; border-radius: 50%; background: rgba(0, 112, 186, 0.15); border: 2px solid #0070ba; font-size: 32px; margin-bottom: 12px;">
@@ -256,19 +291,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 `)}
                 <h3 style="font-size: 22px; color: #fff; margin-bottom: 4px;">Comprar ${item.title}</h3>
                 <div style="font-size: 28px; font-weight: 900; color: #f59e0b; margin-bottom: 10px;">${item.price}</div>
-                <p style="color: #94a3b8; max-width: 500px; margin: 0 auto 16px; font-size: 14px;">
-                    Haz clic en el botón inferior para completar tu pago de forma segura a través de <strong>PayPal</strong> a la cuenta oficial <strong>@albertoeizzi.com</strong>.
+                <p style="color: #94a3b8; max-width: 520px; margin: 0 auto 16px; font-size: 14px;">
+                    Elige tu medio de pago preferido: <strong>PayPal</strong> (Internacional) o <strong>Mercado Pago</strong> (para compradores de Latinoamérica).
                 </p>
-                <div style="display: flex; flex-direction: column; gap: 10px; max-width: 420px; margin: 0 auto;">
+                <div style="display: flex; flex-direction: column; gap: 10px; max-width: 440px; margin: 0 auto;">
                     <a href="${paypalDirectUrl}" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #0070ba, #003087); padding: 14px 24px; font-size: 15px; justify-content: center; box-shadow: 0 4px 20px rgba(0,112,186,0.5);">
-                        <span>💳 PAGAR ${item.price} VÍA PAYPAL (@albertoeizzi.com)</span>
+                        <span>💳 PAGAR ${item.price} CON PAYPAL (@albertoeizzi.com)</span>
                     </a>
-                    <a href="https://www.paypal.com/paypalme/albertoeizzi" target="_blank" class="btn btn-secondary" style="font-size: 12px; justify-content: center;">
-                        <span>🌐 Enlace directo PayPal.Me (@albertoeizzi)</span>
+                    <a href="${mercadoPagoUrl}" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #009ee3, #007eb5); padding: 14px 24px; font-size: 15px; justify-content: center; box-shadow: 0 4px 20px rgba(0,158,227,0.4);">
+                        <span>🤝 PAGAR CON MERCADO PAGO (LATINOAMÉRICA)</span>
                     </a>
+                    <div style="padding: 10px 16px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.18); color: #94a3b8; font-size: 13px; font-weight: 700;">
+                        📱 Google Pay (G Pay) — Próximamente disponible
+                    </div>
+                    ${item.pageUrl ? `
+                        <a href="${item.pageUrl}" class="btn btn-secondary" style="font-size: 13px; justify-content: center;">
+                            <span>📦 Ir a la página dedicada de Assets (${item.pageUrl})</span>
+                        </a>
+                    ` : ''}
                 </div>
                 <div style="margin-top: 16px; font-size: 12px; color: #64748b;">
-                    🔒 Conexión segura SSL • Cuenta verificada PayPal: <code>albertoeizzi.com</code>
+                    🔒 Conexión segura SSL • Cuenta verificada: <code>albertoeizzi.com</code>
                 </div>
             </div>
         `;
@@ -292,6 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Enlaces de categoría en la barra de navegación superior y en los 4 Banners chicos
     document.querySelectorAll('.nav-cat-link, .cat-banner-link').forEach(link => {
         link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href') || '';
+            // Si el enlace apunta a una página dedicada (minigames.html o assets.html), navegar directamente
+            if (href.endsWith('.html') && !href.startsWith('#')) {
+                if (window.soundFX) window.soundFX.click();
+                return;
+            }
             const cat = link.getAttribute('data-cat');
             if (cat) {
                 if (window.soundFX) window.soundFX.click();
