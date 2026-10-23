@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://al652025.github.io/arquivisual-games_studio/sitemap.xml
+

@@ -16,7 +16,8 @@ class ArcadeGame {
 
         this.state = 'idle'; // 'idle', 'playing', 'gameover'
         this.score = 0;
-        this.highScore = parseInt(localStorage.getItem('arquivisual_highscore') || '0', 10);
+        this.highScore = 0;
+        try { this.highScore = Math.max(0, parseInt(localStorage.getItem('arquivisual_highscore') || '0', 10) || 0); } catch {}
         this.speed = 6;
         this.gravity = 0.55;
         this.distance = 0;
@@ -54,6 +55,7 @@ class ArcadeGame {
 
     initControls() {
         window.addEventListener('keydown', (e) => {
+            if (document.activeElement !== this.canvas || document.hidden) return;
             if (['Space', 'ArrowUp', 'KeyW'].includes(e.code)) {
                 e.preventDefault();
                 this.handleJump();
@@ -63,6 +65,7 @@ class ArcadeGame {
         // Controles táctiles / ratón en el canvas
         this.canvas.addEventListener('pointerdown', (e) => {
             e.preventDefault();
+            this.canvas.focus({preventScroll:true});
             this.handleJump();
         });
     }
@@ -112,7 +115,7 @@ class ArcadeGame {
         this.state = 'gameover';
         if (this.score > this.highScore) {
             this.highScore = Math.floor(this.score);
-            localStorage.setItem('arquivisual_highscore', this.highScore);
+            try { localStorage.setItem('arquivisual_highscore', this.highScore); } catch {}
         }
         if (window.soundFX) window.soundFX.hit();
 
@@ -486,8 +489,13 @@ class ArcadeGame {
     }
 
     loop(timestamp) {
-        this.update();
-        this.draw();
+        const rect = this.canvas.getBoundingClientRect();
+        const visible = !document.hidden && rect.bottom > 0 && rect.top < window.innerHeight;
+        if (visible && (!this.lastTime || timestamp - this.lastTime >= 1000 / 60 - 1)) {
+            this.update();
+            this.draw();
+            this.lastTime = timestamp;
+        }
         requestAnimationFrame(this.boundLoop);
     }
 }
