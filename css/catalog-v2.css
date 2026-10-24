@@ -29,12 +29,12 @@
 .catalog-v2 .animated-studio-banner::after { content:none;animation:none; }
 .catalog-v2 .animated-studio-banner .main-studio-banner-img,
 .catalog-v2 .animated-studio-banner:hover .main-studio-banner-img { animation:none;transform:none;object-fit:contain; }
-.banner-effects { position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1; }
+.banner-effects { position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;contain:paint; }
 .banner-depth { position:absolute;inset:-12px;transform:translate3d(var(--banner-x),var(--banner-y),0);transition:transform .35s ease-out; }
-.banner-aura { position:absolute;border-radius:50%;mix-blend-mode:screen;opacity:.15;animation:studio-aura 11s ease-in-out infinite; }
+.banner-aura { position:absolute;border-radius:50%;opacity:.15;animation:studio-aura 11s ease-in-out infinite; }
 .banner-aura-cyan { left:32%;top:-28%;width:40%;height:110%;background:radial-gradient(ellipse,#67e8f95c,transparent 65%); }
 .banner-aura-violet { right:0;bottom:-40%;width:65%;height:115%;background:radial-gradient(ellipse,#a78bfa70,transparent 65%);animation-delay:-5s; }
-.banner-sweep { position:absolute;inset:-30% -45%;background:linear-gradient(110deg,transparent 41%,#a5f3fc12 48%,#e0f2fe35 50%,#c4b5fd12 52%,transparent 59%);transform:translate3d(-75%,0,0);mix-blend-mode:screen;opacity:0;animation:studio-sweep 14s ease-in-out infinite; }
+.banner-sweep { position:absolute;top:-10%;bottom:-10%;left:-50%;width:45%;background:linear-gradient(110deg,transparent 10%,#a5f3fc12 40%,#e0f2fe35 50%,#c4b5fd12 60%,transparent 90%);transform:translate3d(0,0,0);opacity:0;animation:studio-sweep 14s ease-in-out infinite; }
 .banner-orbit { position:absolute;left:49%;top:22%;width:12%;aspect-ratio:1;border:1px solid #a5f3fc20;border-left-color:#a5f3fc80;border-right-color:#c4b5fd65;border-radius:50%;box-shadow:0 0 12px #67e8f918;opacity:.55;animation:studio-orbit 24s linear infinite; }
 .banner-spark { position:absolute;left:var(--spark-x);top:var(--spark-y);width:var(--spark-size,3px);height:var(--spark-size,3px);border-radius:50%;background:#c3faff;box-shadow:0 0 7px 1px #67e8f970;opacity:0;animation:studio-spark var(--spark-duration,7s) ease-in-out var(--spark-delay,0s) infinite; }
 .banner-spark:nth-of-type(3n) { background:#e7d7ff;box-shadow:0 0 8px 1px #a78bfa70; }
@@ -45,7 +45,7 @@
 .banner-motion-toggle { display:inline-flex;gap:6px;align-items:center;font:500 11px var(--font-body);padding:7px 10px;border:1px solid #34415b;border-radius:8px;background:#0f1829;color:#aebfd7;cursor:pointer;min-height:32px; }
 .banner-motion-toggle:hover { color:#c8f6ff;border-color:#5d8598; }
 @keyframes studio-aura { 0%,100% { opacity:.1;transform:scale(.93); } 50% { opacity:.32;transform:scale(1.06); } }
-@keyframes studio-sweep { 0%,9% { transform:translate3d(-75%,0,0);opacity:0; } 12% { opacity:.7; } 36% { transform:translate3d(75%,0,0);opacity:0; } 100% { transform:translate3d(75%,0,0);opacity:0; } }
+@keyframes studio-sweep { 0%,9% { transform:translate3d(0,0,0);opacity:0; } 12% { opacity:.7; } 36%,100% { transform:translate3d(350%,0,0);opacity:0; } }
 @keyframes studio-orbit { from { transform:rotate(0deg) scaleY(.78); } to { transform:rotate(360deg) scaleY(.78); } }
 @keyframes studio-spark { 0%,100% { opacity:0;transform:translate3d(0,5px,0) scale(.6); } 30% { opacity:.8; } 80% { opacity:0;transform:translate3d(9px,-24px,0) scale(1.05); } }
 @keyframes studio-edge { 0%,100% { opacity:.25; } 50% { opacity:.75; } }
@@ -326,3 +326,12 @@
 .catalog-v2 .arcade-canvas { touch-action:pan-y; }
 @media(max-width:1050px) { html:not(.catalog-js) .site-header-inner { flex-wrap:wrap; } html:not(.catalog-js) .site-navigation { display:flex;flex-wrap:wrap;padding:0 0 16px; } .spotlight-card { grid-template-columns:minmax(0,1fr); }.spotlight-art { max-height:380px; }.spotlight-card>div { padding:24px; } }
 @media(max-width:600px) { .home-spotlight { padding:34px 0 40px; }.spotlight-grid { grid-template-columns:minmax(0,1fr); }.spotlight-art { max-height:none; }.spotlight-card h3 { font-size:32px; }.catalog-search input { font-size:16px; }.catalog-filter-group button { min-height:44px; }.banner-motion-toggle { min-height:44px; } }
+
+/* Un único control persistente de música, sin invadir navegación o contenido. */
+.site-music { position:fixed;right:16px;bottom:16px;z-index:120;max-width:calc(100vw - 32px); }
+.site-music button { min-height:44px;padding:10px 16px;border:1px solid #47667e;border-radius:30px;background:#101a2bef;color:#d8f8ff;font:600 13px var(--font-body);box-shadow:0 4px 20px #0006;cursor:pointer; }
+.site-music button[aria-pressed=true] { border-color:#67e8f9; }
+.site-music button:disabled { opacity:.65;cursor:default; }
+@media (hover:hover) and (pointer:fine) {
+  .animated-studio-banner[data-banner-motion=running] .banner-depth { will-change:transform; }
+}

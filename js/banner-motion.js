@@ -24,6 +24,7 @@
     banner.dataset.bannerPreference = reduced.matches && !explicitMotion ? 'reduced' : 'full';
     banner.dataset.bannerMotion = running ? 'running' : 'paused';
     button.hidden = false;
+    button.setAttribute('aria-pressed', String(enabled));
     button.textContent = enabled ? '⏸ Pausar animación' : '▶ Activar animación';
     button.title = reduced.matches && !enabled ? 'Tu dispositivo prefiere reducir movimiento. Podés activar este banner si querés.' : 'Controlar los efectos del banner';
     if (!running) resetDepth();
@@ -38,7 +39,8 @@
     if (finePointer.matches && banner.dataset.bannerMotion === 'running') bounds = banner.getBoundingClientRect();
   });
   banner.addEventListener('pointermove', event => {
-    if (!bounds || !finePointer.matches || banner.dataset.bannerMotion !== 'running') return;
+    if (!finePointer.matches || banner.dataset.bannerMotion !== 'running') return;
+    if (!bounds) bounds = banner.getBoundingClientRect();
     point = {x:event.clientX,y:event.clientY};
     if (frame) return;
     frame = requestAnimationFrame(() => {
